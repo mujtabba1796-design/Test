@@ -171,28 +171,7 @@
     </div>
 
     <script>
-        // ==================== SUPABASE SETUP NOTES ====================
-        // Before using this app, run the following SQL in your Supabase SQL Editor:
-        /*
-        -- Create profiles table
-        CREATE TABLE public.profiles (
-          id UUID REFERENCES auth.users(id) PRIMARY KEY,
-          email TEXT NOT NULL,
-          full_name TEXT,
-          role TEXT CHECK (role IN ('dg_ceo','umc','daf','drpa','do','der','headteacher','teacher','parent')) DEFAULT 'parent',
-          created_at TIMESTAMPTZ DEFAULT NOW()
-        );
         
-        -- Enable RLS
-        ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
-        
-        -- Allow users to insert/select their own profile
-        CREATE POLICY "Users can insert own profile" ON public.profiles FOR INSERT WITH CHECK (auth.uid() = id);
-        CREATE POLICY "Users can view own profile" ON public.profiles FOR SELECT USING (auth.uid() = id);
-        CREATE POLICY "Users can update own profile" ON public.profiles FOR UPDATE USING (auth.uid() = id);
-        
-        -- Also create other tables as needed (students, teachers, etc.)
-        */
         
         // ==================== GLOBALS ====================
         const SUBJECTS = ["Quran", "Fiqh", "Arabic", "English", "Mathematics", "Science"];
