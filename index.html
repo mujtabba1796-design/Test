@@ -20,7 +20,7 @@
     <meta name="description" content="Al‑Istiqaamah Flying Wings Academy – nurturing faith, knowledge, and leadership in Samaru, Zaria, Kaduna State.">
     <meta property="og:title" content="Al‑Istiqaamah Flying Wings Academy">
     <meta property="og:description" content="Official portal for staff, parents, and administrators. Academic management, attendance, fees, and multi‑subject grading.">
-    <meta property="og:image" content="c1364001-6bda-4303-bd26-89f7483d97b5.jpg">
+    <meta property="og:image" content="https://main/c1364001-6bda-4303-bd26-89f7483d97b5.jpg">
     <meta property="og:url" content="https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
@@ -56,8 +56,7 @@
                 <div class="flex flex-col lg:flex-row justify-between items-start gap-10">
                     <div class="max-w-2xl">
                         <div class="flex items-center gap-4 mb-4">
-                        <img src="https://via.placeholder.com/400x100?text=Al-Istiqaamah+Academy" 
-     alt="Logo" class="logo-img" />
+                            <img src="./logo.png" alt="Al‑Istiqaamah Flying Wings Academy Logo" class="logo-img" onerror="this.onerror=null; this.src='https://placehold.co/400x200?text=Logo+Placeholder';">
                             <div>
                                 <h1 class="text-3xl md:text-4xl font-bold">Al‑Istiqaamah <span class="text-amber-300">Flying Wings Academy</span></h1>
                             </div>
@@ -172,7 +171,28 @@
     </div>
 
     <script>
+        // ==================== SUPABASE SETUP NOTES ====================
+        // Before using this app, run the following SQL in your Supabase SQL Editor:
+        /*
+        -- Create profiles table
+        CREATE TABLE public.profiles (
+          id UUID REFERENCES auth.users(id) PRIMARY KEY,
+          email TEXT NOT NULL,
+          full_name TEXT,
+          role TEXT CHECK (role IN ('dg_ceo','umc','daf','drpa','do','der','headteacher','teacher','parent')) DEFAULT 'parent',
+          created_at TIMESTAMPTZ DEFAULT NOW()
+        );
         
+        -- Enable RLS
+        ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+        
+        -- Allow users to insert/select their own profile
+        CREATE POLICY "Users can insert own profile" ON public.profiles FOR INSERT WITH CHECK (auth.uid() = id);
+        CREATE POLICY "Users can view own profile" ON public.profiles FOR SELECT USING (auth.uid() = id);
+        CREATE POLICY "Users can update own profile" ON public.profiles FOR UPDATE USING (auth.uid() = id);
+        
+        -- Also create other tables as needed (students, teachers, etc.)
+        */
         
         // ==================== GLOBALS ====================
         const SUBJECTS = ["Quran", "Fiqh", "Arabic", "English", "Mathematics", "Science"];
