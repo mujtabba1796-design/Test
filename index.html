@@ -3,485 +3,683 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Al‑Istiqaamah Flying Wings Academy | Complete School Dashboard</title>
-    <!-- Supabase JS -->
+    <link rel="icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./css/custom.css">
+    
+    <!-- Supabase JS Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script>
-        // ========== SUPABASE CONFIGURATION ==========
-        // Replace with your own Supabase URL and anon key if different
         const SUPABASE_URL = 'https://cevyvtmekqthlgxpesgg.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_Zv4AhAkc3ygqRX6GDmN_sQ_DuVxaGol';
-        const supabase = supabaseCreateClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        window.supabaseClient = supabase; // make available globally
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     </script>
-    <!-- Tailwind + Font Awesome -->
+    
+    <!-- SEO & OpenGraph Tags -->
+    <title>Al‑Istiqaamah Flying Wings Academy | Advanced Portal</title>
+    <meta name="description" content="Al‑Istiqaamah Flying Wings Academy – nurturing faith, knowledge, and leadership in Samaru, Zaria, Kaduna State.">
+    <meta property="og:title" content="Al‑Istiqaamah Flying Wings Academy">
+    <meta property="og:description" content="Official portal for staff, parents, and administrators. Academic management, attendance, fees, and multi‑subject grading.">
+    <meta property="og:image" content="https://picsum.photos/id/20/1200/630.jpg">
+    <meta property="og:url" content="https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap');
+        * { font-family: 'Inter', sans-serif; }
         .hero-pattern { background: linear-gradient(135deg, #0a2e2c 0%, #0f3b38 100%); }
         .card-hover { transition: all 0.3s ease; }
         .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.15); }
         .sidebar { background: #0f2e2c; }
-        .nav-link:hover, .nav-link.active { background: rgba(255,255,255,0.12); border-left: 4px solid #f59e0b; }
+        .nav-link-active, .nav-link:hover { background: rgba(255,255,255,0.12); border-left: 4px solid #f59e0b; }
         .att-check { width: 20px; height: 20px; accent-color: #10b981; }
         .carousel-slide { transition: opacity 0.5s ease-in-out; }
         .carousel-btn { background: rgba(0,0,0,0.5); transition: all 0.2s; }
         .carousel-btn:hover { background: rgba(0,0,0,0.8); }
+        .dot { transition: all 0.2s; cursor: pointer; }
         .grade-input { width: 70px; padding: 4px; border-radius: 6px; border: 1px solid #ccc; text-align: center; }
+        .logo-img { height: 60px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+        .sidebar-logo { height: 40px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto; }
+        .slide-thumb { width: 80px; height: 60px; object-fit: cover; border-radius: 8px; }
     </style>
 </head>
 <body class="bg-gray-50">
 
-    <!-- LANDING PAGE (public) -->
+    <!-- LANDING PAGE -->
     <div id="landingPage" class="min-h-screen">
         <div class="hero-pattern text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.2"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
             <div class="relative container mx-auto px-6 py-20 md:py-28">
-                <div class="flex flex-col lg:flex-row justify-between gap-10">
+                <div class="flex flex-col lg:flex-row justify-between items-start gap-10">
                     <div class="max-w-2xl">
-                        <h1 class="text-4xl font-bold">Al‑Istiqaamah <span class="text-amber-300">Flying Wings Academy</span></h1>
-                        <p class="mt-4 text-lg">Faith • Knowledge • Leadership</p>
-                        <div class="mt-6 bg-amber-900/30 border-l-4 border-amber-400 p-3 rounded-r-xl">
-                            <p class="italic">“The best of mankind are those who are most beneficial to humanity.”</p>
+                        <div class="flex items-center gap-4 mb-4">
+                            <img src="./logo.png" alt="Al‑Istiqaamah Flying Wings Academy Logo" class="logo-img" onerror="this.onerror=null; this.src='https://placehold.co/400x200?text=Logo+Placeholder';">
+                            <div>
+                                <h1 class="text-3xl md:text-4xl font-bold">Al‑Istiqaamah <span class="text-amber-300">Flying Wings Academy</span></h1>
+                            </div>
                         </div>
-                        <button id="loginBtnHero" class="mt-8 bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold px-8 py-3 rounded-full shadow-lg inline-flex items-center gap-2">
+                        <div class="bg-amber-900/30 border-l-4 border-amber-400 p-3 rounded-r-xl mb-3">
+                            <p class="text-sm italic">“The best of mankind are those who are most beneficial to humanity.”</p>
+                            <p class="text-xs text-amber-200">— Prophetic Saying (Ṣaḥīḥ al-Jāmiʿ, 3289)</p>
+                            <p class="text-sm font-semibold mt-1"><i class="fas fa-feather-alt"></i> Sub-Motto: Faith • Knowledge • Leadership</p>
+                        </div>
+                        <p class="text-amber-200 text-sm mt-1"><i class="fas fa-map-marker-alt mr-1"></i> No. 10 Federal Government Layout (Behind SG), Samaru, Zaria, Kaduna State</p>
+                        <div class="flex flex-wrap gap-4 mt-4 text-sm">
+                            <span><i class="fas fa-phone-alt text-amber-300 mr-1"></i> 08067990749, 08084816590</span>
+                            <span><i class="fas fa-envelope text-amber-300 mr-1"></i> alistiqaamah.gi@outlook.com</span>
+                        </div>
+                        <button id="loginBtnHero" class="mt-8 bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold px-8 py-3 rounded-full shadow-lg transition transform hover:scale-105 inline-flex items-center gap-2">
                             <i class="fas fa-chalkboard-user"></i> Staff / Admin Login
                         </button>
                     </div>
-                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 w-80">
-                        <div class="flex justify-between border-b border-white/20 pb-2">
-                            <span><i class="fas fa-clock"></i> Local Time</span>
-                            <span id="liveTime" class="font-mono">--:--:--</span>
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 shadow-xl border border-white/20 w-80">
+                        <div class="flex items-center justify-between border-b border-white/20 pb-2 mb-3">
+                            <span class="text-amber-200"><i class="fas fa-clock"></i> Local Time</span>
+                            <span id="liveTime" class="font-mono text-xl font-bold">--:--:--</span>
                         </div>
-                        <div class="mt-3"><span id="liveDate"></span></div>
-                        <div class="mt-2"><span id="weatherTemp">--</span>°C <span id="weatherDesc"></span></div>
+                        <div class="flex items-center justify-between">
+                            <div><p class="text-sm opacity-80"><i class="fas fa-calendar-alt mr-1"></i> <span id="liveDate"></span></p>
+                            <p class="text-3xl font-bold mt-1"><span id="weatherTemp">--</span>°C</p>
+                            <p class="text-sm capitalize"><span id="weatherDesc">loading...</span></p></div>
+                            <i id="weatherIcon" class="fas fa-cloud-sun text-5xl text-amber-300"></i>
+                        </div>
+                        <p class="text-xs mt-3 text-center text-gray-200"><i class="fas fa-location-dot"></i> <span id="userLocation">Fetching location...</span></p>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Slideshow placeholder -->
-        <div class="container mx-auto px-6 py-12">
-            <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-gray-900 h-96">
-                <div id="slidesContainer" class="relative w-full h-full"></div>
-                <button id="prevSlide" class="carousel-btn absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl p-2 rounded-full w-10 h-10">‹</button>
-                <button id="nextSlide" class="carousel-btn absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl p-2 rounded-full w-10 h-10">›</button>
-                <div id="dotsContainer" class="absolute bottom-4 left-0 right-0 flex justify-center gap-2"></div>
-            </div>
-        </div>
-        <footer class="bg-slate-900 text-gray-400 py-8 text-center text-sm">© 2025 Al‑Istiqaamah Flying Wings Academy — Samaru, Zaria</footer>
+
+        <!-- Slideshow (dynamic, managed by CEO) -->
+        <div class="container mx-auto px-6 py-12"><div class="text-center mb-6"><h2 class="text-3xl font-bold text-gray-800">📸 Our Campus <span class="text-amber-600">in Focus</span></h2></div>
+        <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-gray-900"><div id="slidesContainer" class="relative h-96 md:h-[500px] w-full"></div>
+        <button id="prevSlide" class="carousel-btn absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl p-2 rounded-full w-10 h-10 flex items-center justify-center z-10"><i class="fas fa-chevron-left"></i></button>
+        <button id="nextSlide" class="carousel-btn absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl p-2 rounded-full w-10 h-10 flex items-center justify-center z-10"><i class="fas fa-chevron-right"></i></button>
+        <div id="dotsContainer" class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10"></div></div></div>
+        
+        <div class="container mx-auto px-6 py-10"><div class="grid md:grid-cols-2 gap-10"><div class="bg-white rounded-2xl shadow-xl p-8 card-hover border-t-8 border-emerald-600"><div class="text-emerald-600 text-4xl mb-4"><i class="fas fa-eye"></i></div><h2 class="text-2xl font-bold text-gray-800 mb-3">🌙 Vision Statement</h2><p class="text-gray-700 leading-relaxed italic">To cultivate a crystal community of believers and learners who embody faith, knowledge, and inspiration — becoming beacons of guidance, excellence, and service to humanity.</p></div>
+        <div class="bg-white rounded-2xl shadow-xl p-8 card-hover border-t-8 border-amber-500"><div class="text-amber-500 text-4xl mb-4"><i class="fas fa-bullhorn"></i></div><h2 class="text-2xl font-bold text-gray-800 mb-3">🌿 Mission Statement</h2><p class="text-gray-700 leading-relaxed">Al-Istiqaamah strives to develop an enriched learning environment that promotes academic achievement, leadership, and Islamic values, nurturing learners who live by the Qur’an and the Sunnah while contributing positively to society.</p></div></div></div>
+        
+        <div class="bg-gray-100 py-16"><div class="container mx-auto px-6"><h2 class="text-3xl font-bold text-center text-gray-800 mb-4">🌸 Core <span class="text-amber-600">Objectives</span></h2><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8"><div class="bg-white p-5 rounded-xl shadow-md flex gap-3"><i class="fas fa-quran text-emerald-600 text-2xl"></i><p class="text-sm">📖 Enrich minds, souls, and bodies with authentic Qur’anic and Prophetic knowledge.</p></div><div class="bg-white p-5 rounded-xl shadow-md flex gap-3"><i class="fas fa-book-open text-emerald-600 text-2xl"></i><p class="text-sm">🎓 Foster joyful Qur’anic memorization.</p></div><div class="bg-white p-5 rounded-xl shadow-md flex gap-3"><i class="fas fa-crown text-emerald-600 text-2xl"></i><p class="text-sm">🌟 Develop confident, principled leaders.</p></div></div></div></div>
+        
+        <div class="bg-emerald-900 text-white py-12 text-center"><div class="container mx-auto px-6"><h2 class="text-3xl font-bold mb-3">Begin Your Child's Journey of Faith & Excellence</h2><p class="mb-6">Admissions open for all tracks. Contact our admission office.</p><div class="flex flex-wrap justify-center gap-4"><a href="tel:08067990749" class="bg-amber-500 hover:bg-amber-600 text-gray-900 px-6 py-3 rounded-full inline-flex gap-2"><i class="fas fa-phone-alt"></i> Call Us</a><button id="loginBtnFooter" class="border-2 border-amber-400 hover:bg-amber-400 hover:text-gray-900 px-6 py-3 rounded-full font-semibold"><i class="fas fa-chalkboard-user"></i> Staff Dashboard</button></div></div></div>
+        <footer class="bg-slate-900 text-gray-400 py-8 text-center text-sm"><p>© 2025 Al‑Istiqaamah Flying Wings Academy — No. 10 Federal Government Layout, Samaru, Zaria, Kaduna State. RC: 1983033</p></footer>
     </div>
 
-    <!-- LOGIN MODAL -->
-    <div id="loginScreen" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70">
-        <div class="bg-white rounded-2xl max-w-md w-full p-8 relative">
-            <button id="closeLoginBtn" class="absolute top-3 right-4 text-gray-400 text-2xl">&times;</button>
-            <h2 id="authTitle" class="text-2xl font-bold text-center mb-4">Staff / Admin Login</h2>
+    <!-- LOGIN MODAL (Supabase Integration) -->
+    <div id="loginScreen" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display: none; background: rgba(0,0,0,0.7);">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
+            <div id="authHeader" class="text-center mb-4">
+                <i class="fas fa-dove text-5xl text-amber-600"></i>
+                <h2 id="authTitle" class="text-2xl font-bold">Staff / Admin Login</h2>
+            </div>
+            
             <form id="authForm">
-                <div id="regFields" class="hidden mb-3">
-                    <label>Full Name</label>
-                    <input type="text" id="regFullName" class="w-full border rounded-lg p-2" required>
+                <div id="regFields" class="hidden">
+                    <label class="font-medium">Full Name</label>
+                    <input type="text" id="regFullName" class="w-full border rounded-lg p-2 mb-3" placeholder="John Doe" required>
                 </div>
-                <div class="mb-3">
-                    <label>Email</label>
-                    <input type="email" id="authEmail" class="w-full border rounded-lg p-2" required>
+                <div>
+                    <label class="font-medium">Email Address</label>
+                    <input type="email" id="authEmail" class="w-full border rounded-lg p-2 mb-3" required>
                 </div>
-                <div class="mb-3">
-                    <label>Password</label>
-                    <input type="password" id="authPassword" class="w-full border rounded-lg p-2" required>
+                <div>
+                    <label class="font-medium">Password</label>
+                    <input type="password" id="authPassword" class="w-full border rounded-lg p-2 mb-1" required>
                 </div>
                 <div class="mb-4 text-right">
-                    <button type="button" onclick="resetPasswordAction()" class="text-xs text-amber-600">Forgot Password?</button>
+                    <button type="button" onclick="resetPasswordAction()" class="text-xs text-amber-600 hover:underline">Forgot Password?</button>
                 </div>
-                <div id="roleSelection" class="mb-4">
-                    <label>Role</label>
-                    <select id="authRole" class="w-full border rounded-lg p-2">
-                        <option value="dg_ceo">Director General</option><option value="umc">UMC</option><option value="daf">DAF</option>
-                        <option value="drpa">DRPA</option><option value="do">DO</option><option value="der">DER</option>
-                        <option value="headteacher">Head Teacher</option><option value="teacher">Teacher</option><option value="parent">Parent</option>
+                <div id="roleSelection">
+                    <label class="font-medium">Role</label>
+                    <select id="authRole" class="w-full border rounded-lg p-2 mb-4">
+                        <option value="dg_ceo">Director General</option>
+                        <option value="umc">User Management Committee</option>
+                        <option value="daf">DAF - Director of Admin & Finance</option>
+                        <option value="drpa">DRPA - Director of Research & Academics</option>
+                        <option value="do">DO - Operations</option>
+                        <option value="der">DER - Educational Resources</option>
+                        <option value="headteacher">Head Teacher</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="parent">Parent</option>
                     </select>
                 </div>
                 <button type="submit" id="authSubmitBtn" class="w-full bg-amber-600 text-white py-2 rounded-lg font-bold">Login</button>
             </form>
             <p class="text-center mt-4 text-sm">
                 <span id="toggleText">Don't have an account?</span>
-                <button id="toggleAuthMode" class="text-amber-600 font-bold">Sign Up</button>
+                <button id="toggleAuthMode" class="text-amber-600 font-bold hover:underline">Sign Up</button>
             </p>
+            <button id="closeLoginBtn" class="absolute top-3 right-4 text-gray-400 text-2xl">&times;</button>
         </div>
     </div>
 
-    <!-- DASHBOARD APP (authenticated) -->
-    <div id="appContainer" class="hidden fixed inset-0 z-40 flex bg-white overflow-hidden">
+    <!-- DASHBOARD APP -->
+    <div id="appContainer" class="hidden flex h-screen w-full fixed inset-0 z-40 bg-white overflow-hidden">
         <aside class="sidebar text-white w-80 flex flex-col">
-            <div class="p-4 text-center border-b border-white/20">
-                <p class="text-sm"><i class="fas fa-user-tie"></i> Role: <span id="userRoleDisplay"></span></p>
-                <p class="text-lg font-semibold">Welcome, <span id="userNameDisplay"></span></p>
+            <div class="p-4 border-b border-white/20 text-center">
+                <img src="./logo.png" alt="School Logo" class="sidebar-logo" onerror="this.onerror=null; this.src='https://placehold.co/200x80?text=Logo';">
+                <p class="text-sm"><i class="fas fa-user-tie"></i> Role: <span id="userRoleDisplay" class="font-bold"></span></p>
+                <p class="text-lg font-semibold mt-1">Welcome, <span id="userNameDisplay"></span></p>
             </div>
-            <nav id="dynamicNav" class="flex-1 px-3 mt-4 space-y-1 overflow-y-auto"></nav>
-            <div class="p-4 border-t"><button id="logoutBtn" class="w-full bg-red-700 hover:bg-red-800 py-2 rounded-lg"><i class="fas fa-sign-out-alt"></i> Logout</button></div>
+            <nav id="dynamicNav" class="flex-1 px-3 mt-4 space-y-1"></nav>
+            <div class="p-4 border-t border-white/20"><button id="logoutBtn" class="w-full bg-red-700 hover:bg-red-800 py-2 rounded-lg transition"><i class="fas fa-sign-out-alt mr-2"></i>Logout</button></div>
         </aside>
-        <main id="mainContent" class="flex-1 overflow-auto bg-gray-100 p-6"></main>
+        <main class="flex-1 overflow-auto bg-gray-100 p-6" id="mainContent"></main>
     </div>
 
     <script>
-        // ==================== FULL SCHOOL DASHBOARD CODE ====================
-        // ----- GLOBALS -----
-        const SUBJECTS = ["Quran","Fiqh","Arabic","English","Mathematics","Science"];
-        let schoolData = { students: [], teachers: [], feeTransactions: [], attendanceRecords: [], operationalBudgets: [] };
+        // ==================== GLOBALS ====================
+        const SUBJECTS = ["Quran", "Fiqh", "Arabic", "English", "Mathematics", "Science"];
+        let schoolData = {
+            students: [],
+            teachers: [],
+            feeTransactions: [],
+            attendanceRecords: [],
+            operationalBudgets: [{ year: 2025, allocation: 7500000, spent: 3200000 }]
+        };
         let currentUser = null;
-        let slidesData = [];
-        let currentSlideIndex = 0, slideInterval;
 
-        // ----- HELPER: Refresh all data from Supabase -----
-        async function refreshSchoolData() {
-            const { data: students } = await supabaseClient.from('students').select('*');
-            if (students) schoolData.students = students.map(s => ({ ...s, feeStatus: s.fee_status, grades: s.grades || {} }));
-            const { data: teachers } = await supabaseClient.from('teachers').select('*');
-            if (teachers) schoolData.teachers = teachers;
-            const { data: fees } = await supabaseClient.from('fee_transactions').select('*');
-            if (fees) schoolData.feeTransactions = fees;
-            const { data: attendance } = await supabaseClient.from('attendance_records').select('*');
-            if (attendance) schoolData.attendanceRecords = attendance;
-            const { data: budget } = await supabaseClient.from('operational_budgets').select('*').limit(1);
-            if (budget?.length) schoolData.operationalBudgets = budget;
-            // update attendance %
-            for (let s of schoolData.students) {
-                let recs = schoolData.attendanceRecords.filter(r => r.student_id === s.id);
-                let pct = recs.length ? Math.round((recs.filter(r=>r.status==='present').length/recs.length)*100) : 0;
-                s.attendance = pct;
-                await supabaseClient.from('students').update({ attendance_pct: pct }).eq('id', s.id);
-            }
+        // ==================== TARGETED DATA REFRESH (PERFORMANCE FIX) ====================
+        async function refreshStudents() {
+            const { data: students, error } = await supabaseClient.from('students').select('*');
+            if (!error && students) {
+                schoolData.students = students.map(s => ({
+                    ...s,
+                    feeStatus: s.fee_status,
+                    attendance: s.attendance_pct || 0,
+                    grades: s.grades || {}
+                }));
+            } else if (error) console.error("Students fetch error:", error);
+        }
+        async function refreshTeachers() {
+            const { data: teachers, error } = await supabaseClient.from('teachers').select('*');
+            if (!error && teachers) schoolData.teachers = teachers;
+            else console.error("Teachers fetch error:", error);
+        }
+        async function refreshFees() {
+            const { data: fees, error } = await supabaseClient.from('fee_transactions').select('*');
+            if (!error && fees) schoolData.feeTransactions = fees;
+            else console.error("Fee transactions error:", error);
+        }
+        async function refreshAttendance() {
+            const { data: attendance, error } = await supabaseClient.from('attendance_records').select('*');
+            if (!error && attendance) schoolData.attendanceRecords = attendance;
+            else console.error("Attendance error:", error);
+        }
+        async function refreshBudget() {
+            const { data: budget, error } = await supabaseClient.from('operational_budgets').select('*').limit(1);
+            if (!error && budget && budget.length) schoolData.operationalBudgets = budget;
+        }
+        // On‑demand attendance percentage (avoid updating DB in loop)
+        function getStudentAttendancePercent(studentId) {
+            const records = schoolData.attendanceRecords.filter(r => r.student_id === studentId);
+            return records.length ? Math.round((records.filter(r => r.status === 'present').length / records.length) * 100) : 0;
         }
 
-        // ----- STUDENT / TEACHER ACTIONS -----
-        async function addStudentLogic(name, section, level, feeStatus, boarding) {
-            const { error } = await supabaseClient.from('students').insert([{ name, section, level, fee_status: feeStatus, boarding, grades: {} }]);
-            if (error) { alert(error.message); return false; }
-            await refreshSchoolData();
+        // ==================== STUDENT VALIDATION & ACTIONS ====================
+        function validateStudentData(name, level) {
+            if (!name || name.trim().length < 3) {
+                alert("Student name must be at least 3 characters.");
+                return false;
+            }
+            if (isNaN(level) || level < 1 || level > 12) {
+                alert("Please enter a valid school level (1-12).");
+                return false;
+            }
             return true;
         }
-        async function addTeacher(name, section, subject, salary=100000) {
-            await supabaseClient.from('teachers').insert([{ name, section, subject, salary }]);
-            await refreshSchoolData();
-        }
-        async function updateStudentGrades(studentId, grades) {
-            await supabaseClient.from('students').update({ grades }).eq('id', studentId);
-            await refreshSchoolData();
-        }
-        async function payFeeAction(studentId) {
-            let student = schoolData.students.find(s=>s.id===studentId);
-            if (!student || student.feeStatus==='Paid') return;
-            await supabaseClient.from('students').update({ fee_status: 'Paid' }).eq('id', studentId);
-            await supabaseClient.from('fee_transactions').insert([{ student_id: studentId, student_name: student.name, amount: 25000, date: new Date().toISOString().slice(0,10) }]);
-            await refreshSchoolData();
-            refreshCurrentView();
-        }
-        async function saveAttendance(attendanceList) {
-            const today = new Date().toISOString().slice(0,10);
-            for (let a of attendanceList) {
-                await supabaseClient.from('attendance_records').upsert({ student_id: a.studentId, date: today, status: a.status }, { onConflict: 'student_id,date' });
-            }
-            await refreshSchoolData();
+
+        async function addStudentLogic(name, section, level, payment, boarding) {
+            if (!validateStudentData(name, level)) return false;
+            const { error } = await supabaseClient.from('students').insert([{
+                name: name.trim(), section, level: parseInt(level), fee_status: payment,
+                boarding: boarding === true || boarding === 'true',
+                attendance_pct: 0, grades: {}
+            }]);
+            if (error) { alert("Error adding student: " + error.message); return false; }
+            await refreshStudents(); // only refresh students
+            alert(`✅ Student ${name} enrolled successfully`);
+            return true;
         }
 
-        // ----- SLIDESHOW MANAGEMENT (localStorage) -----
-        function loadSlides() {
-            let stored = localStorage.getItem('academy_slides');
-            slidesData = stored ? JSON.parse(stored) : [
+        async function updateStudentGrades(studentId, grades) {
+            const { error } = await supabaseClient.from('students').update({ grades }).eq('id', studentId);
+            if (error) alert("Grade update error: " + error.message);
+            else await refreshStudents();
+        }
+
+        async function payFeeAction(studentId) {
+            const student = schoolData.students.find(s => s.id === studentId);
+            if (!student || student.feeStatus === 'Paid') return;
+            const { error: upErr } = await supabaseClient.from('students').update({ fee_status: 'Paid' }).eq('id', studentId);
+            if (upErr) { alert("Payment error: " + upErr.message); return; }
+            const { error: txErr } = await supabaseClient.from('fee_transactions').insert([{
+                student_id: studentId, student_name: student.name, amount: 25000,
+                date: new Date().toISOString().slice(0,10)
+            }]);
+            if (txErr) console.error(txErr);
+            await refreshStudents();
+            await refreshFees();
+            alert("Payment recorded ✅");
+            refreshCurrentView();
+        }
+
+        async function saveAttendance(attendances) {
+            const today = new Date().toISOString().slice(0,10);
+            for (let att of attendances) {
+                const { error } = await supabaseClient.from('attendance_records').upsert({
+                    student_id: att.studentId, date: today, status: att.status
+                }, { onConflict: 'student_id,date' });
+                if (error) console.error(error);
+            }
+            await refreshAttendance();
+        }
+
+        async function addTeacher(name, section, subject, salary = 100000) {
+            const { error } = await supabaseClient.from('teachers').insert([{ name, section, subject, salary }]);
+            if (error) alert("Error adding teacher: " + error.message);
+            else await refreshTeachers();
+        }
+
+        // ==================== PASSWORD RECOVERY ====================
+        async function updateUserPassword(newPassword) {
+            const { error } = await supabaseClient.auth.updateUser({ password: newPassword });
+            if (error) alert("Error updating password: " + error.message);
+            else alert("Password updated successfully! Please log in again.");
+        }
+
+        // ==================== SLIDESHOW MANAGEMENT (localStorage) ====================
+        let slidesData = [];
+        let slideInterval;
+        function loadSlidesFromStorage() {
+            const stored = localStorage.getItem('academy_slides');
+            if (stored) slidesData = JSON.parse(stored);
+            else slidesData = [
                 { url: "https://picsum.photos/id/20/1200/600", caption: "Modern Classrooms" },
-                { url: "https://picsum.photos/id/30/1200/600", caption: "Qur'an Memorization" },
+                { url: "https://picsum.photos/id/30/1200/600", caption: "Qur’an Memorization" },
                 { url: "https://picsum.photos/id/40/1200/600", caption: "Science Lab" }
             ];
         }
-        function saveSlides() { localStorage.setItem('academy_slides', JSON.stringify(slidesData)); }
+        function saveSlidesToStorage() { localStorage.setItem('academy_slides', JSON.stringify(slidesData)); }
+        
+        // Resize image before storing as base64 (performance fix)
+        async function resizeImage(dataUrl, maxWidth = 800, quality = 0.7) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+                    if (width > maxWidth) {
+                        height = (height * maxWidth) / width;
+                        width = maxWidth;
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    resolve(canvas.toDataURL('image/jpeg', quality));
+                };
+                img.src = dataUrl;
+            });
+        }
+
+        async function addSlideFromFile(file, caption) {
+            const reader = new FileReader();
+            const dataUrl = await new Promise((resolve) => {
+                reader.onload = (e) => resolve(e.target.result);
+                reader.readAsDataURL(file);
+            });
+            const resizedUrl = await resizeImage(dataUrl, 800, 0.7);
+            slidesData.push({ url: resizedUrl, caption: caption || "Uploaded Image" });
+            saveSlidesToStorage();
+            rebuildSlideshow();
+            resetAutoSlide();
+        }
+
+        function deleteSlide(index) {
+            if (index >= 0 && index < slidesData.length) {
+                slidesData.splice(index, 1);
+                saveSlidesToStorage();
+                rebuildSlideshow();
+                if (currentSlideIndex >= slidesData.length) currentSlideIndex = slidesData.length - 1;
+                if (currentSlideIndex < 0) currentSlideIndex = 0;
+                goToSlide(currentSlideIndex);
+                resetAutoSlide();
+            }
+        }
+
         function rebuildSlideshow() {
-            let container = document.getElementById('slidesContainer');
-            let dots = document.getElementById('dotsContainer');
+            const container = document.getElementById('slidesContainer');
+            const dotsContainer = document.getElementById('dotsContainer');
             if (!container) return;
-            container.innerHTML = ''; dots.innerHTML = '';
+            container.innerHTML = '';
+            dotsContainer.innerHTML = '';
             slidesData.forEach((slide, idx) => {
                 let div = document.createElement('div');
-                div.className = `carousel-slide absolute inset-0 w-full h-full transition-opacity duration-500 ${idx===currentSlideIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`;
-                div.style.backgroundImage = `linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('${slide.url}')`;
+                div.className = `carousel-slide absolute inset-0 w-full h-full transition-opacity duration-500 ${idx === currentSlideIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`;
+                // Lazy load: only set background for active and adjacent slides
+                if (idx === currentSlideIndex || idx === currentSlideIndex+1 || idx === currentSlideIndex-1) {
+                    div.style.backgroundImage = `linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('${slide.url}')`;
+                } else {
+                    div.style.backgroundImage = 'none';
+                }
                 div.style.backgroundSize = 'cover';
                 div.style.backgroundPosition = 'center';
                 let cap = document.createElement('div');
-                cap.className = 'absolute bottom-0 left-0 right-0 bg-black/60 text-white p-4 text-center';
+                cap.className = 'absolute bottom-0 left-0 right-0 bg-black/60 text-white p-4 text-center text-lg font-semibold';
                 cap.innerText = slide.caption;
                 div.appendChild(cap);
                 container.appendChild(div);
                 let dot = document.createElement('button');
-                dot.className = `dot w-3 h-3 rounded-full mx-1 ${idx===currentSlideIndex ? 'bg-amber-400 w-4' : 'bg-white/60'}`;
-                dot.onclick = () => goToSlide(idx);
-                dots.appendChild(dot);
+                dot.className = `dot w-3 h-3 rounded-full mx-1 ${idx === currentSlideIndex ? 'bg-amber-400 w-4' : 'bg-white/60'}`;
+                dot.setAttribute('data-index', idx);
+                dot.addEventListener('click', () => goToSlide(idx));
+                dotsContainer.appendChild(dot);
             });
         }
-        function goToSlide(idx) {
+
+        let currentSlideIndex = 0;
+        function goToSlide(index) {
             let slides = document.querySelectorAll('#slidesContainer .carousel-slide');
             let dots = document.querySelectorAll('#dotsContainer .dot');
             if (!slides.length) return;
-            if (idx < 0) idx = slides.length-1;
-            if (idx >= slides.length) idx = 0;
-            slides[currentSlideIndex]?.classList.remove('opacity-100','z-10');
-            slides[currentSlideIndex]?.classList.add('opacity-0','z-0');
-            slides[idx]?.classList.remove('opacity-0','z-0');
-            slides[idx]?.classList.add('opacity-100','z-10');
-            if (dots[currentSlideIndex]) dots[currentSlideIndex].classList.replace('bg-amber-400','bg-white/60');
-            if (dots[idx]) dots[idx].classList.replace('bg-white/60','bg-amber-400');
-            currentSlideIndex = idx;
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+            slides[currentSlideIndex]?.classList.remove('opacity-100', 'z-10');
+            slides[currentSlideIndex]?.classList.add('opacity-0', 'z-0');
+            slides[index]?.classList.remove('opacity-0', 'z-0');
+            slides[index]?.classList.add('opacity-100', 'z-10');
+            // Lazy load background for new slide and neighbours
+            [index-1, index, index+1].forEach(i => {
+                if (slides[i] && slidesData[i] && slides[i].style.backgroundImage === 'none') {
+                    slides[i].style.backgroundImage = `linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('${slidesData[i].url}')`;
+                }
+            });
+            if (dots[currentSlideIndex]) {
+                dots[currentSlideIndex].classList.remove('bg-amber-400', 'w-4');
+                dots[currentSlideIndex].classList.add('bg-white/60');
+            }
+            if (dots[index]) {
+                dots[index].classList.remove('bg-white/60');
+                dots[index].classList.add('bg-amber-400', 'w-4');
+            }
+            currentSlideIndex = index;
             resetAutoSlide();
         }
-        function nextSlide() { goToSlide(currentSlideIndex+1); }
-        function prevSlide() { goToSlide(currentSlideIndex-1); }
-        function resetAutoSlide() { if (slideInterval) clearInterval(slideInterval); if(slidesData.length>1) slideInterval = setInterval(nextSlide,5000); }
-        async function addSlideFromFile(file, caption) {
-            return new Promise(resolve => {
-                let reader = new FileReader();
-                reader.onload = e => {
-                    slidesData.push({ url: e.target.result, caption: caption || "Uploaded" });
-                    saveSlides();
-                    rebuildSlideshow();
-                    resetAutoSlide();
-                    resolve();
-                };
-                reader.readAsDataURL(file);
+        function nextSlide() { goToSlide(currentSlideIndex + 1); }
+        function prevSlide() { goToSlide(currentSlideIndex - 1); }
+        function resetAutoSlide() { if (slideInterval) clearInterval(slideInterval); if(slidesData.length > 1) slideInterval = setInterval(() => nextSlide(), 5000); }
+
+        function renderSlideManager() {
+            let html = `<div class="bg-white p-6 rounded-xl shadow-lg max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold mb-4">📸 Manage Slideshow Images</h2>
+                <div class="mb-6 p-4 border-2 border-dashed border-gray-300 rounded-lg">
+                    <label class="block font-semibold mb-2">Upload New Slide Image (JPG, PNG, GIF)</label>
+                    <input type="file" id="slideImageInput" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100">
+                    <input type="text" id="slideCaption" placeholder="Caption (optional)" class="mt-3 w-full border rounded-lg p-2">
+                    <button id="uploadSlideBtn" class="mt-3 bg-emerald-600 text-white px-6 py-2 rounded-lg font-semibold">➕ Add to Slideshow</button>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Current Slides (${slidesData.length})</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    ${slidesData.map((slide, idx) => `
+                        <div class="border rounded-lg overflow-hidden shadow-sm bg-gray-50">
+                            <img src="${slide.url}" class="slide-thumb w-full h-32 object-cover" alt="slide">
+                            <div class="p-2">
+                                <p class="text-sm font-medium truncate">${slide.caption}</p>
+                                <button onclick="window.deleteSlideFromManager(${idx})" class="mt-2 bg-red-500 text-white text-xs px-3 py-1 rounded w-full">Delete</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                ${slidesData.length === 0 ? '<p class="text-center text-gray-500 mt-4">No slides. Upload some images!</p>' : ''}
+            </div>`;
+            document.getElementById("mainContent").innerHTML = html;
+            document.getElementById("uploadSlideBtn")?.addEventListener("click", async () => {
+                const fileInput = document.getElementById("slideImageInput");
+                const caption = document.getElementById("slideCaption").value.trim();
+                if (!fileInput.files.length) { alert("Select an image."); return; }
+                await addSlideFromFile(fileInput.files[0], caption);
+                alert("Slide added!");
+                renderSlideManager();
             });
-        }
-        function deleteSlide(index) {
-            slidesData.splice(index,1);
-            saveSlides();
-            rebuildSlideshow();
-            if (currentSlideIndex >= slidesData.length) currentSlideIndex = slidesData.length-1;
-            if (currentSlideIndex<0) currentSlideIndex=0;
-            goToSlide(currentSlideIndex);
+            window.deleteSlideFromManager = (idx) => { if (confirm("Delete slide?")) { deleteSlide(idx); renderSlideManager(); } };
         }
 
-        // ----- DASHBOARD VIEWS (role-based) -----
+        // ==================== DASHBOARD RENDER FUNCTIONS ====================
         function refreshCurrentView() {
-            let active = document.querySelector('.nav-link.active');
-            if (active) renderContentView(active.dataset.view);
+            const active = document.querySelector('.nav-link.bg-white\\/10');
+            if (active) renderContentView(active.getAttribute('data-view'));
             else renderDashboard();
         }
         function renderContentView(view) {
-            const views = {
-                dashboard: renderDashboard, students: renderAllStudents, "enroll-student": renderEnrollStudent,
-                teachers: renderTeachers, "enroll-staff": renderEnrollStaff, fees: renderFeeManagement,
-                "payment-report": renderPaymentReport, boarding: renderBoarding, "teachers-payroll": renderPayroll,
+            const fns = {
+                dashboard: renderDashboard, students: renderAllStudents, "enroll-student": renderDGEnrollStudent,
+                teachers: renderTeachers, "enroll-staff": renderDGEnrollStaff, fees: renderFeeManagement,
+                boarding: renderBoarding, "payment-report": renderPaymentReport, "teachers-payroll": renderTeachersPayroll,
                 "budget-report": renderBudgetReport, "budget-management": renderBudgetManagement,
                 "academic-performance": renderAcademicPerformance, "section-analysis": renderSectionAnalysis,
-                "research-notes": renderResearchNotes, "grade-students": renderGradeStudents,
-                "my-class": renderMyClass, attendance: renderAttendance, "section-students": renderHeadSection,
-                "section-fees": renderHeadFees, "my-children": renderMyChildren, "payment-history": renderParentPayments,
-                "grade-students-teacher": renderTeacherGrade, "manage-slides": renderSlideManager
+                "research-notes": renderResearchNotes, "grade-students": renderGradeStudentsDRPA,
+                "my-class": renderTeacherClass, attendance: renderAttendanceView, "section-students": renderHeadTeacherSection,
+                "section-fees": renderHeadTeacherFees, "my-children": renderParentChildren, "payment-history": renderParentPayments,
+                "grade-students-teacher": renderGradeStudentsTeacher, "manage-slides": renderSlideManager
             };
-            (views[view] || renderDashboard)();
+            (fns[view] || renderDashboard)();
         }
         function renderDashboard() {
-            let total = schoolData.students.length, teachers = schoolData.teachers.length;
-            let pending = schoolData.students.filter(s=>s.feeStatus==='Pending').length;
-            let avgAtt = schoolData.students.length ? Math.round(schoolData.students.reduce((a,b)=>a+b.attendance,0)/schoolData.students.length) : 0;
-            document.getElementById('mainContent').innerHTML = `
-                <div class="space-y-6">
-                    <h2 class="text-2xl font-bold">Welcome, ${currentUser.full_name}</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
-                        <div class="bg-white p-5 rounded-2xl shadow border-l-8 border-emerald-500"><i class="fas fa-users text-3xl text-emerald-500"></i><p class="text-2xl font-bold">${total}</p><p>Students</p></div>
-                        <div class="bg-white p-5 rounded-2xl shadow border-l-8 border-amber-500"><i class="fas fa-chalkboard-user text-3xl text-amber-500"></i><p class="text-2xl font-bold">${teachers}</p><p>Staff</p></div>
-                        <div class="bg-white p-5 rounded-2xl shadow border-l-8 border-red-500"><i class="fas fa-dollar-sign text-3xl text-red-500"></i><p class="text-2xl font-bold">${pending}</p><p>Pending Fees</p></div>
-                        <div class="bg-white p-5 rounded-2xl shadow border-l-8 border-blue-500"><i class="fas fa-calendar-check text-3xl text-blue-500"></i><p class="text-2xl font-bold">${avgAtt}%</p><p>Avg Attendance</p></div>
-                    </div>
-                </div>`;
+            document.getElementById("mainContent").innerHTML = `<div class="bg-white p-6 rounded-xl shadow">
+                <h2 class="text-2xl font-bold">Welcome ${currentUser.full_name}</h2>
+                <div class="grid grid-cols-2 gap-4 mt-6">
+                    <div class="p-5 bg-emerald-50 rounded-2xl text-center"><i class="fas fa-users text-3xl text-emerald-600"></i><p class="text-2xl font-bold mt-2">${schoolData.students.length}</p><p>Students</p></div>
+                    <div class="p-5 bg-amber-50 rounded-2xl text-center"><i class="fas fa-chalkboard-user text-3xl text-amber-600"></i><p class="text-2xl font-bold mt-2">${schoolData.teachers.length}</p><p>Staff</p></div>
+                </div></div>`;
         }
         function renderAllStudents() {
-            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">All Students</h2><table class="w-full text-sm"><thead class="bg-gray-100"><tr><th>Name</th><th>Section</th><th>Level</th><th>Fee</th><th>Avg Grade</th></tr></thead><tbody>`;
+            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">📋 All Students</h2><div class="overflow-x-auto"><table class="w-full text-sm"><thead class="bg-gray-100"><tr><th>Name</th><th>Section</th><th>Level</th><th>Fee</th><th>Avg Grade</th></tr></thead><tbody>`;
             schoolData.students.forEach(s => {
-                let avg = Math.round(SUBJECTS.reduce((a,sub)=>a+(s.grades?.[sub]||0),0)/SUBJECTS.length);
+                const gradesArr = SUBJECTS.map(sub => s.grades?.[sub] || 0);
+                const avg = Math.round(gradesArr.reduce((a,b)=>a+b,0)/SUBJECTS.length);
                 html += `<tr><td class="p-2">${s.name}</td><td>${s.section}</td><td>${s.level}</td><td class="${s.feeStatus==='Paid'?'text-green-600':'text-red-500'}">${s.feeStatus}</td><td>${avg}%</td></tr>`;
             });
-            html += `</tbody></table></div>`;
-            document.getElementById('mainContent').innerHTML = html;
+            html += `</tbody></table></div></div>`;
+            document.getElementById("mainContent").innerHTML = html;
         }
-        function renderEnrollStudent() {
-            let sections = ["Regular Islamiya","Regular Memorization","Intensive Program","Islamic Integration","Advanced Class","Women Class"];
-            let html = `<div class="bg-white p-6 rounded-xl max-w-2xl mx-auto"><h2 class="text-2xl font-bold mb-4">Enroll Student</h2><form id="enrollForm"><div class="mb-3"><label>Name</label><input id="stName" class="w-full border p-2 rounded"></div><div class="mb-3"><label>Section</label><select id="stSection" class="w-full border p-2 rounded">${sections.map(s=>`<option>${s}</option>`).join('')}</select></div><div class="mb-3"><label>Level</label><input id="stLevel" type="number" class="w-full border p-2 rounded"></div><div class="mb-3"><label>Fee Status</label><select id="stFee" class="w-full border p-2 rounded"><option>Pending</option><option>Paid</option></select></div><div class="mb-3"><label>Boarding</label><select id="stBoard" class="w-full border p-2 rounded"><option value="false">Day</option><option value="true">Boarder</option></select></div><button type="submit" class="bg-emerald-600 text-white px-6 py-2 rounded-lg">Register</button></form></div>`;
-            document.getElementById('mainContent').innerHTML = html;
-            document.getElementById('enrollForm').addEventListener('submit', async (e) => {
+        function renderDGEnrollStudent() {
+            const sections = ["Regular Islamiya","Regular Memorization","Intensive Program","Islamic Integration","Advanced Class","Women Class"];
+            let html = `<div class="bg-white p-6 rounded-xl max-w-2xl mx-auto shadow"><h2>Enroll Student</h2><form id="dgStudentForm"><div><label>Name</label><input id="dgStName" class="w-full border p-2 rounded"></div><div><label>Section</label><select id="dgStSection" class="w-full border p-2 rounded">${sections.map(s=>`<option>${s}</option>`).join('')}</select></div><div><label>Level</label><input id="dgStLevel" type="number" class="w-full border p-2 rounded"></div><div><label>Fee Status</label><select id="dgStFee" class="w-full border p-2 rounded"><option>Pending</option><option>Paid</option></select></div><div><label>Boarding</label><select id="dgStBoard" class="w-full border p-2 rounded"><option value="false">Day</option><option value="true">Boarder</option></select></div><button type="submit" class="mt-3 bg-emerald-600 text-white px-6 py-2 rounded">Register</button></form></div>`;
+            document.getElementById("mainContent").innerHTML = html;
+            document.getElementById("dgStudentForm")?.addEventListener("submit", async (e) => {
                 e.preventDefault();
-                let name = document.getElementById('stName').value;
-                let section = document.getElementById('stSection').value;
-                let level = parseInt(document.getElementById('stLevel').value);
-                let fee = document.getElementById('stFee').value;
-                let board = document.getElementById('stBoard').value === 'true';
+                const name = document.getElementById("dgStName").value;
+                const section = document.getElementById("dgStSection").value;
+                const level = parseInt(document.getElementById("dgStLevel").value);
+                const fee = document.getElementById("dgStFee").value;
+                const board = document.getElementById("dgStBoard").value === 'true';
                 if (await addStudentLogic(name, section, level, fee, board)) renderAllStudents();
             });
         }
         function renderTeachers() {
-            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">Teachers</h2><table class="w-full"><thead><tr><th>Name</th><th>Section</th><th>Subject</th></tr></thead><tbody>${schoolData.teachers.map(t=>`<tr><td class="p-2">${t.name}</td><td>${t.section}</td><td>${t.subject}</td></tr>`).join('')}</tbody></table></div>`;
-            document.getElementById('mainContent').innerHTML = html;
+            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2>👥 Staff</h2><table class="w-full"><thead><tr><th>Name</th><th>Section</th><th>Subject</th></tr></thead><tbody>${schoolData.teachers.map(t=>`<tr><td>${t.name}</td><td>${t.section}</td><td>${t.subject}</td></tr>`).join('')}</tbody></table></div>`;
+            document.getElementById("mainContent").innerHTML = html;
         }
-        function renderEnrollStaff() {
-            let html = `<div class="bg-white p-6 rounded-xl max-w-2xl mx-auto"><h2 class="text-2xl font-bold mb-4">Add Staff</h2><form id="staffForm"><input id="staffName" placeholder="Name" class="w-full border p-2 mb-3 rounded"><input id="staffSection" placeholder="Section" class="w-full border p-2 mb-3 rounded"><input id="staffSubject" placeholder="Subject" class="w-full border p-2 mb-3 rounded"><button type="submit" class="bg-teal-600 text-white px-6 py-2 rounded">Add</button></form></div>`;
-            document.getElementById('mainContent').innerHTML = html;
-            document.getElementById('staffForm').addEventListener('submit', async (e) => {
+        function renderDGEnrollStaff() {
+            let html = `<div class="bg-white p-6 rounded-xl max-w-2xl mx-auto shadow"><h2>Enroll Staff</h2><form id="dgStaffForm"><input id="staffName" placeholder="Name" class="w-full border p-2 mb-2"><input id="staffSection" placeholder="Section" class="w-full border p-2 mb-2"><input id="staffSubject" placeholder="Subject" class="w-full border p-2 mb-2"><button type="submit" class="bg-teal-600 text-white px-6 py-2 rounded">Add</button></form></div>`;
+            document.getElementById("mainContent").innerHTML = html;
+            document.getElementById("dgStaffForm")?.addEventListener("submit", async (e) => {
                 e.preventDefault();
-                await addTeacher(document.getElementById('staffName').value, document.getElementById('staffSection').value, document.getElementById('staffSubject').value);
-                renderTeachers();
+                const name = document.getElementById("staffName").value.trim();
+                if (name) {
+                    await addTeacher(name, document.getElementById("staffSection").value, document.getElementById("staffSubject").value);
+                    renderTeachers();
+                }
             });
         }
         function renderFeeManagement() {
-            let pending = schoolData.students.filter(s=>s.feeStatus==='Pending');
-            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">Pending Fees (${pending.length})</h2><ul>${pending.map(s=>`<li class="flex justify-between py-1">${s.name} <button onclick="window.payFeeAction('${s.id}')" class="bg-amber-500 text-white px-3 py-1 rounded text-sm">Mark Paid</button></li>`).join('')}</ul></div>`;
-            document.getElementById('mainContent').innerHTML = html;
+            let pending = schoolData.students.filter(s => s.feeStatus === "Pending");
+            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2>💰 Pending Fees (${pending.length})</h2><ul>${pending.map(s=>`<li class="flex justify-between">${s.name} <button onclick="window.payFeeAction('${s.id}')" class="bg-amber-500 text-white px-3 py-1 rounded text-sm">Mark Paid</button></li>`).join('')}</ul></div>`;
+            document.getElementById("mainContent").innerHTML = html;
         }
         function renderPaymentReport() {
-            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">Fee Transactions</h2><ul>${schoolData.feeTransactions.map(t=>`<li>${t.student_name} - ₦${t.amount} on ${t.date}</li>`).join('')}</ul></div>`;
-            document.getElementById('mainContent').innerHTML = html;
+            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2>📄 Fee Transactions</h2><ul>${schoolData.feeTransactions.map(t=>`<li>${t.student_name} - ₦${t.amount} on ${t.date}</li>`).join('')}</ul></div>`;
+            document.getElementById("mainContent").innerHTML = html;
         }
         function renderBoarding() {
-            let boarders = schoolData.students.filter(s=>s.boarding);
-            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">Boarding Students (${boarders.length})</h2><ul>${boarders.map(b=>`<li>${b.name}</li>`).join('')}</ul></div>`;
-            document.getElementById('mainContent').innerHTML = html;
+            let boarders = schoolData.students.filter(s => s.boarding);
+            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2>🏠 Boarding (${boarders.length})</h2><ul>${boarders.map(b=>`<li>${b.name}</li>`).join('')}</ul></div>`;
+            document.getElementById("mainContent").innerHTML = html;
         }
-        function renderPayroll() {
+        function renderTeachersPayroll() {
             let total = schoolData.teachers.reduce((s,t)=>s+(t.salary||100000),0);
-            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">Payroll</h2><table class="w-full"><thead><tr><th>Name</th><th>Salary</th></tr></thead><tbody>${schoolData.teachers.map(t=>`<tr><td>${t.name}</td><td>₦${(t.salary||100000).toLocaleString()}</td></tr>`).join('')}</tbody></table><div class="mt-3 font-bold">Total: ₦${total.toLocaleString()}</div></div>`;
-            document.getElementById('mainContent').innerHTML = html;
+            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2>💰 Payroll</h2><table class="w-full"><thead><tr><th>Name</th><th>Salary</th></tr></thead><tbody>${schoolData.teachers.map(t=>`<tr><td>${t.name}</td><td>₦${(t.salary||100000).toLocaleString()}</td></tr>`).join('')}</tbody></table></div><div class="mt-2 font-bold">Total: ₦${total.toLocaleString()}</div></div>`;
+            document.getElementById("mainContent").innerHTML = html;
         }
         function renderBudgetReport() {
-            let b = schoolData.operationalBudgets[0] || { year:2025, allocation:7500000, spent:3200000 };
-            let percent = (b.spent/b.allocation)*100;
-            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">Budget ${b.year}</h2><p>Allocation: ₦${b.allocation.toLocaleString()}</p><p>Spent: ₦${b.spent.toLocaleString()}</p><p>Remaining: ₦${(b.allocation-b.spent).toLocaleString()}</p><div class="w-full bg-gray-200 rounded-full h-2.5 mt-2"><div class="bg-emerald-600 h-2.5 rounded-full" style="width:${percent}%"></div></div></div>`;
-            document.getElementById('mainContent').innerHTML = html;
+            let b = schoolData.operationalBudgets[0];
+            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2>📊 Budget Report</h2><p>Year: ${b.year}</p><p>Allocation: ₦${b.allocation.toLocaleString()}</p><p>Spent: ₦${b.spent.toLocaleString()}</p><p>Remaining: ₦${(b.allocation-b.spent).toLocaleString()}</p><div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-emerald-600 h-2.5 rounded-full" style="width:${(b.spent/b.allocation)*100}%"></div></div></div>`;
+            document.getElementById("mainContent").innerHTML = html;
         }
         function renderBudgetManagement() {
-            let b = schoolData.operationalBudgets[0] || { year:2025, allocation:7500000, spent:3200000 };
-            let html = `<div class="bg-white p-6 rounded-xl max-w-2xl mx-auto"><h2 class="text-2xl font-bold mb-4">Edit Budget</h2><form id="budgetForm"><div class="mb-3"><label>Year</label><input id="budgetYear" value="${b.year}" class="w-full border p-2 rounded"></div><div class="mb-3"><label>Allocation (₦)</label><input id="budgetAlloc" value="${b.allocation}" class="w-full border p-2 rounded"></div><div class="mb-3"><label>Spent (₦)</label><input id="budgetSpent" value="${b.spent}" class="w-full border p-2 rounded"></div><button type="submit" class="bg-emerald-600 text-white px-6 py-2 rounded">Update</button></form></div>`;
-            document.getElementById('mainContent').innerHTML = html;
-            document.getElementById('budgetForm').addEventListener('submit', async (e) => {
+            let budget = schoolData.operationalBudgets[0];
+            let html = `<div class="bg-white p-6 rounded-xl shadow max-w-2xl mx-auto"><h2 class="text-2xl font-bold mb-4">✍️ Write School Budget</h2><form id="budgetForm"><div class="mb-4"><label>Fiscal Year</label><input type="number" id="budgetYear" value="${budget.year}" class="w-full border p-2 rounded"></div><div class="mb-4"><label>Total Allocation (₦)</label><input type="number" id="budgetAlloc" value="${budget.allocation}" class="w-full border p-2 rounded"></div><div class="mb-4"><label>Total Spent (₦)</label><input type="number" id="budgetSpent" value="${budget.spent}" class="w-full border p-2 rounded"></div><button type="submit" class="bg-emerald-600 text-white px-6 py-2 rounded">Update Budget</button></form></div>`;
+            document.getElementById("mainContent").innerHTML = html;
+            document.getElementById("budgetForm")?.addEventListener("submit", async (e) => {
                 e.preventDefault();
-                let year = parseInt(document.getElementById('budgetYear').value);
-                let alloc = parseInt(document.getElementById('budgetAlloc').value);
-                let spent = parseInt(document.getElementById('budgetSpent').value);
-                await supabaseClient.from('operational_budgets').upsert({ year, allocation: alloc, spent });
-                await refreshSchoolData();
-                renderBudgetManagement();
+                const year = parseInt(document.getElementById("budgetYear").value);
+                const alloc = parseInt(document.getElementById("budgetAlloc").value);
+                const spent = parseInt(document.getElementById("budgetSpent").value);
+                if (!isNaN(alloc) && !isNaN(spent)) {
+                    await supabaseClient.from('operational_budgets').upsert({ year, allocation: alloc, spent });
+                    await refreshBudget();
+                    renderBudgetManagement();
+                }
             });
         }
         function renderAcademicPerformance() {
-            let total = schoolData.students.reduce((sum,s)=> sum + SUBJECTS.reduce((a,sub)=>a+(s.grades?.[sub]||0),0)/SUBJECTS.length, 0);
-            let avg = (total/schoolData.students.length).toFixed(1);
-            document.getElementById('mainContent').innerHTML = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">Overall Average</h2><p class="text-3xl font-bold">${avg}%</p></div>`;
+            let totalAvg = 0;
+            schoolData.students.forEach(s => {
+                let avg = SUBJECTS.reduce((a,sub)=>a+(s.grades?.[sub]||0),0)/SUBJECTS.length;
+                totalAvg += avg;
+            });
+            let overall = (totalAvg/schoolData.students.length).toFixed(1);
+            document.getElementById("mainContent").innerHTML = `<div class="bg-white p-5 rounded-xl shadow"><h2>📈 Academic Performance</h2><p>Overall Avg: ${overall}%</p></div>`;
         }
         function renderSectionAnalysis() {
             let sections = {};
             schoolData.students.forEach(s => {
                 let avg = SUBJECTS.reduce((a,sub)=>a+(s.grades?.[sub]||0),0)/SUBJECTS.length;
-                if (!sections[s.section]) sections[s.section] = { sum:0, count:0 };
+                if(!sections[s.section]) sections[s.section]={sum:0,count:0};
                 sections[s.section].sum += avg;
                 sections[s.section].count++;
             });
-            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">Section Performance</h2><ul>${Object.entries(sections).map(([sec,data])=>`<li>${sec}: ${(data.sum/data.count).toFixed(1)}%</li>`).join('')}</ul></div>`;
-            document.getElementById('mainContent').innerHTML = html;
+            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2>Section Analysis</h2><ul>${Object.entries(sections).map(([sec,data])=>`<li>${sec}: ${(data.sum/data.count).toFixed(1)}%</li>`).join('')}</ul></div>`;
+            document.getElementById("mainContent").innerHTML = html;
         }
         function renderResearchNotes() {
-            document.getElementById('mainContent').innerHTML = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">Research & Development</h2><p>STEM-Islamic integration project, AI literacy program.</p></div>`;
+            document.getElementById("mainContent").innerHTML = `<div class="bg-white p-5 rounded-xl shadow"><h2>📝 Research Notes</h2><p>Blended learning, STEM-Islamic integration plan.</p></div>`;
         }
-        function renderGradeStudents() {
-            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">Grade Students (All Subjects)</h2>${schoolData.students.map(s=>`<div class="border-b pb-3 mb-3"><b>${s.name}</b><div class="flex flex-wrap gap-2 mt-2">${SUBJECTS.map(sub=>`<label class="text-sm">${sub}:<input type="number" id="g_${s.id}_${sub}" value="${s.grades?.[sub]||70}" class="grade-input ml-1"></label>`).join('')}</div><button onclick="updateGrades('${s.id}')" class="bg-blue-500 text-white px-3 py-1 rounded text-sm mt-2">Save</button></div>`).join('')}</div>`;
-            document.getElementById('mainContent').innerHTML = html;
+        function renderGradeStudentsDRPA() {
+            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2>Grade Students</h2>${schoolData.students.map(s=>`<div>${s.name}: ${SUBJECTS.map(sub=>`${sub}:<input type="number" id="g_${s.id}_${sub}" value="${s.grades?.[sub]||70}" class="grade-input mx-1">`).join('')}<button onclick="updateGrades('${s.id}')" class="bg-blue-500 text-white px-2 py-1 rounded">Save</button></div>`).join('')}</div>`;
+            document.getElementById("mainContent").innerHTML = html;
             window.updateGrades = async (sid) => {
                 let newGrades = {};
-                SUBJECTS.forEach(sub => { newGrades[sub] = parseInt(document.getElementById(`g_${sid}_${sub}`).value) || 0; });
+                SUBJECTS.forEach(sub => {
+                    let val = document.getElementById(`g_${sid}_${sub}`).value;
+                    newGrades[sub] = parseInt(val) || 0;
+                });
                 await updateStudentGrades(sid, newGrades);
-                renderGradeStudents();
+                renderGradeStudentsDRPA();
             };
         }
-        function renderMyClass() {
-            let students = schoolData.students.filter(s=>s.section === currentUser.assignedSection);
-            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">My Class (${currentUser.assignedSection})</h2><div class="grid grid-cols-2 gap-3">${students.map(s=>`<div class="border p-3 rounded"><b>${s.name}</b><br>Avg: ${Math.round(SUBJECTS.reduce((a,sub)=>a+(s.grades?.[sub]||0),0)/SUBJECTS.length)}%<br>Attendance: ${s.attendance}%</div>`).join('')}</div></div>`;
-            document.getElementById('mainContent').innerHTML = html;
+        function renderTeacherClass() {
+            let stu = schoolData.students.filter(s => s.section === currentUser.assignedSection);
+            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2>My Class</h2>${stu.map(s=>`<p>📘 ${s.name} - Avg: ${Math.round(SUBJECTS.reduce((a,sub)=>a+(s.grades?.[sub]||0),0)/SUBJECTS.length)}%</p>`).join('')}</div>`;
+            document.getElementById("mainContent").innerHTML = html;
         }
-        function renderAttendance() {
-            let students = schoolData.students.filter(s=>s.section === currentUser.assignedSection);
+        function renderAttendanceView() {
+            let students = schoolData.students.filter(s => s.section === currentUser.assignedSection);
             let today = new Date().toISOString().slice(0,10);
-            let existing = schoolData.attendanceRecords.filter(r=>r.date===today);
+            let existing = schoolData.attendanceRecords.filter(r => r.date === today);
             let statusMap = {};
-            existing.forEach(r=>statusMap[r.student_id]=r.status==='present');
-            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">Mark Attendance (${today})</h2><table class="w-full"><thead><tr><th>Student</th><th>Present</th></tr></thead><tbody>${students.map(s=>`<tr><td>${s.name}</td><td class="text-center"><input type="checkbox" class="att-check" data-id="${s.id}" ${statusMap[s.id]?'checked':''}></td></tr>`).join('')}</tbody></table><button id="saveAttBtn" class="mt-4 bg-emerald-600 text-white px-4 py-2 rounded">Save</button></div>`;
-            document.getElementById('mainContent').innerHTML = html;
-            document.getElementById('saveAttBtn').addEventListener('click', async () => {
-                let checks = document.querySelectorAll('.att-check');
-                let data = [];
-                checks.forEach(cb => data.push({ studentId: cb.dataset.id, status: cb.checked ? 'present' : 'absent' }));
-                await saveAttendance(data);
-                alert("Attendance saved");
-                renderAttendance();
+            existing.forEach(r => statusMap[r.student_id] = r.status === 'present');
+            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2>📆 Mark Attendance</h2><table class="w-full"><thead><tr><th>Student</th><th>Present</th></tr></thead><tbody>${students.map(s=>`<tr><td class="p-2">${s.name}</td><td class="text-center"><input type="checkbox" class="att-check" data-id="${s.id}" ${statusMap[s.id]?'checked':''}></td></tr>`).join('')}</tbody></table><button id="saveAttBtn" class="mt-4 bg-emerald-600 text-white px-4 py-2 rounded">Save</button></div>`;
+            document.getElementById("mainContent").innerHTML = html;
+            let attendanceTimeout;
+            document.getElementById("saveAttBtn")?.addEventListener("click", async () => {
+                clearTimeout(attendanceTimeout);
+                attendanceTimeout = setTimeout(async () => {
+                    let checks = document.querySelectorAll(".att-check");
+                    let attendanceData = [];
+                    checks.forEach(cb => {
+                        attendanceData.push({ studentId: cb.dataset.id, status: cb.checked ? 'present' : 'absent' });
+                    });
+                    await saveAttendance(attendanceData);
+                    alert("Attendance saved");
+                    renderAttendanceView();
+                }, 300);
             });
         }
-        function renderHeadSection() {
-            let students = schoolData.students.filter(s=>s.section === currentUser.section);
-            document.getElementById('mainContent').innerHTML = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">${currentUser.section} Students</h2><ul>${students.map(s=>`<li>${s.name}</li>`).join('')}</ul></div>`;
+        function renderHeadTeacherSection() {
+            let stu = schoolData.students.filter(s => s.section === currentUser.section);
+            document.getElementById("mainContent").innerHTML = `<div class="bg-white p-5 rounded-xl shadow"><h2>${currentUser.section} Students</h2><ul>${stu.map(s=>`<li>${s.name}</li>`).join('')}</ul></div>`;
         }
-        function renderHeadFees() {
-            let pending = schoolData.students.filter(s=>s.section===currentUser.section && s.feeStatus==='Pending');
-            document.getElementById('mainContent').innerHTML = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">Pending Fees in ${currentUser.section}</h2><ul>${pending.map(s=>`<li>${s.name}</li>`).join('')}</ul></div>`;
+        function renderHeadTeacherFees() {
+            let pending = schoolData.students.filter(s => s.section === currentUser.section && s.feeStatus === "Pending");
+            document.getElementById("mainContent").innerHTML = `<div class="bg-white p-5 rounded-xl shadow"><h2>Pending Fees</h2><ul>${pending.map(s=>`<li>${s.name}</li>`).join('')}</ul></div>`;
         }
-        function renderMyChildren() {
-            let children = schoolData.students.filter(s=>currentUser.linkedChildren?.includes(s.id));
-            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">My Children</h2>${children.map(c=>`<div class="border p-3 mb-2"><b>${c.name}</b><br>Avg Grade: ${Math.round(SUBJECTS.reduce((a,sub)=>a+(c.grades?.[sub]||0),0)/SUBJECTS.length)}%<br>Attendance: ${c.attendance}%<br>Fee: ${c.feeStatus}</div>`).join('')}</div>`;
-            document.getElementById('mainContent').innerHTML = html;
+        function renderParentChildren() {
+            let children = schoolData.students.filter(s => currentUser.linkedChildren?.includes(s.id));
+            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2>My Children</h2>${children.map(c=>`<p>${c.name} - Avg: ${Math.round(SUBJECTS.reduce((a,sub)=>a+(c.grades?.[sub]||0),0)/SUBJECTS.length)}%</p>`).join('')}</div>`;
+            document.getElementById("mainContent").innerHTML = html;
         }
         function renderParentPayments() {
-            let payments = schoolData.feeTransactions.filter(t=>currentUser.linkedChildren?.includes(t.student_id));
-            document.getElementById('mainContent').innerHTML = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">Payment History</h2><ul>${payments.map(p=>`<li>${p.student_name} - ₦${p.amount} on ${p.date}</li>`).join('')}</ul></div>`;
+            let payments = schoolData.feeTransactions.filter(t => currentUser.linkedChildren?.includes(t.student_id));
+            document.getElementById("mainContent").innerHTML = `<div class="bg-white p-5 rounded-xl shadow"><h2>Payments</h2><ul>${payments.map(p=>`<li>${p.student_name} - ₦${p.amount}</li>`).join('')}</ul></div>`;
         }
-        function renderTeacherGrade() {
-            let students = schoolData.students.filter(s=>s.section === currentUser.assignedSection);
-            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-3">Grade My Class</h2>${students.map(s=>`<div class="border-b pb-3 mb-3"><b>${s.name}</b><div class="flex flex-wrap gap-2 mt-2">${SUBJECTS.map(sub=>`<label class="text-sm">${sub}:<input type="number" id="g_${s.id}_${sub}" value="${s.grades?.[sub]||70}" class="grade-input ml-1"></label>`).join('')}</div><button onclick="updateTeacherGrade('${s.id}')" class="bg-blue-500 text-white px-3 py-1 rounded text-sm mt-2">Save</button></div>`).join('')}</div>`;
-            document.getElementById('mainContent').innerHTML = html;
-            window.updateTeacherGrade = async (sid) => {
+        function renderGradeStudentsTeacher() {
+            let students = schoolData.students.filter(s => s.section === currentUser.assignedSection);
+            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2>Grade My Class</h2>${students.map(s=>`<div>${s.name}: ${SUBJECTS.map(sub=>`${sub}:<input type="number" id="g_${s.id}_${sub}" value="${s.grades?.[sub]||70}" class="grade-input">`).join('')}<button onclick="updateTeacherGrades('${s.id}')" class="bg-blue-500 text-white px-2 py-1 rounded">Save</button></div>`).join('')}</div>`;
+            document.getElementById("mainContent").innerHTML = html;
+            window.updateTeacherGrades = async (sid) => {
                 let newGrades = {};
-                SUBJECTS.forEach(sub => { newGrades[sub] = parseInt(document.getElementById(`g_${sid}_${sub}`).value) || 0; });
+                SUBJECTS.forEach(sub => {
+                    let val = document.getElementById(`g_${sid}_${sub}`).value;
+                    newGrades[sub] = parseInt(val) || 0;
+                });
                 await updateStudentGrades(sid, newGrades);
-                renderTeacherGrade();
+                renderGradeStudentsTeacher();
             };
-        }
-        function renderSlideManager() {
-            let html = `<div class="bg-white p-6 rounded-xl max-w-4xl mx-auto"><h2 class="text-2xl font-bold mb-4">Manage Slideshow</h2><div class="border-2 border-dashed p-4 mb-6"><input type="file" id="slideImage" accept="image/*"><input type="text" id="slideCaption" placeholder="Caption" class="w-full border p-2 mt-2"><button id="uploadSlideBtn" class="mt-2 bg-emerald-600 text-white px-4 py-2 rounded">Upload</button></div><div class="grid grid-cols-3 gap-3">${slidesData.map((s,i)=>`<div><img src="${s.url}" class="h-24 w-full object-cover rounded"><p class="text-sm">${s.caption}</p><button onclick="deleteSlide(${i})" class="bg-red-500 text-white text-xs px-2 py-1 mt-1 rounded">Delete</button></div>`).join('')}</div></div>`;
-            document.getElementById('mainContent').innerHTML = html;
-            document.getElementById('uploadSlideBtn').addEventListener('click', async () => {
-                let file = document.getElementById('slideImage').files[0];
-                let cap = document.getElementById('slideCaption').value;
-                if (file) { await addSlideFromFile(file, cap); renderSlideManager(); }
-            });
-            window.deleteSlide = (idx) => { deleteSlide(idx); renderSlideManager(); };
         }
 
-        // ----- AUTHENTICATION -----
-        async function ensureProfileExists(user) {
-            let { data: existing } = await supabaseClient.from('profiles').select('*').eq('id', user.id).maybeSingle();
-            if (!existing) {
-                let metadata = user.user_metadata || {};
-                await supabaseClient.from('profiles').insert([{ id: user.id, email: user.email, full_name: metadata.full_name || user.email.split('@')[0], role: metadata.role || 'parent' }]);
-            }
-        }
+        // ==================== AUTHENTICATION ====================
         async function registerUser(email, password, fullName, role) {
-            let { error } = await supabaseClient.auth.signUp({ email, password, options: { data: { full_name: fullName, role } } });
-            if (error) alert(error.message);
-            else alert("Registration successful! Please check your email to confirm.");
+            try {
+                const { data, error } = await supabaseClient.auth.signUp({ email, password });
+                if (error) throw error;
+                const { error: profileError } = await supabaseClient.from('profiles').insert([{ id: data.user.id, email, full_name: fullName, role }]);
+                if (profileError) throw profileError;
+                alert("Registration successful! Please check your email for confirmation.");
+            } catch (error) { alert(error.message); }
         }
         async function loginUser(email, password) {
-            let { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-            if (error) { alert("Login failed: "+error.message); return; }
-            await ensureProfileExists(data.user);
-            let { data: profile } = await supabaseClient.from('profiles').select('*').eq('id', data.user.id).single();
-            if (!profile) { alert("Profile missing"); return; }
-            currentUser = { ...profile, full_name: profile.full_name,
-                assignedSection: profile.role === 'teacher' ? "Regular Islamiya" : null,
-                section: profile.role === 'headteacher' ? "Regular Islamiya" : null,
-                linkedChildren: profile.role === 'parent' ? ["STU1001","STU1002"] : null
-            };
-            showDashboard();
+            try {
+                const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+                const { data: profile, error: pError } = await supabaseClient.from('profiles').select('*').eq('id', data.user.id).single();
+                if (pError) throw pError;
+                currentUser = { ...profile, full_name: profile.full_name, name: profile.full_name };
+                if (currentUser.role === 'teacher') currentUser.assignedSection = "Regular Islamiya";
+                else if (currentUser.role === 'headteacher') currentUser.section = "Regular Islamiya";
+                else if (currentUser.role === 'parent') currentUser.linkedChildren = ["STU1001", "STU1002"];
+                // Load initial data
+                await Promise.all([refreshStudents(), refreshTeachers(), refreshFees(), refreshAttendance(), refreshBudget()]);
+                showDashboard();
+            } catch (error) { alert("Login failed: " + error.message); }
         }
         async function logoutUser() {
+            if (slideInterval) clearInterval(slideInterval); // clear carousel timer
             await supabaseClient.auth.signOut();
             currentUser = null;
             document.getElementById('appContainer').classList.add('hidden');
@@ -489,23 +687,22 @@
             document.getElementById('loginScreen').style.display = 'none';
         }
         async function resetPasswordAction() {
-            let email = document.getElementById('authEmail').value;
-            if (!email) { alert("Enter email"); return; }
-            let { error } = await supabaseClient.auth.resetPasswordForEmail(email);
+            const email = document.getElementById('authEmail').value;
+            if(!email) { alert("Enter your email address"); return; }
+            const { error } = await supabaseClient.auth.resetPasswordForEmail(email);
             if (error) alert(error.message);
-            else alert("Reset link sent to email.");
+            else alert("Password reset link sent to your email!");
         }
         async function checkSession() {
-            let { data: { session } } = await supabaseClient.auth.getSession();
+            const { data: { session } } = await supabaseClient.auth.getSession();
             if (session) {
-                await ensureProfileExists(session.user);
-                let { data: profile } = await supabaseClient.from('profiles').select('*').eq('id', session.user.id).single();
+                const { data: profile } = await supabaseClient.from('profiles').select('*').eq('id', session.user.id).single();
                 if (profile) {
-                    currentUser = { ...profile, full_name: profile.full_name,
-                        assignedSection: profile.role === 'teacher' ? "Regular Islamiya" : null,
-                        section: profile.role === 'headteacher' ? "Regular Islamiya" : null,
-                        linkedChildren: profile.role === 'parent' ? ["STU1001","STU1002"] : null
-                    };
+                    currentUser = { ...profile, full_name: profile.full_name, name: profile.full_name };
+                    if (currentUser.role === 'teacher') currentUser.assignedSection = "Regular Islamiya";
+                    else if (currentUser.role === 'headteacher') currentUser.section = "Regular Islamiya";
+                    else if (currentUser.role === 'parent') currentUser.linkedChildren = ["STU1001", "STU1002"];
+                    await Promise.all([refreshStudents(), refreshTeachers(), refreshFees(), refreshAttendance(), refreshBudget()]);
                     showDashboard();
                 }
             }
@@ -517,58 +714,86 @@
             document.getElementById('userRoleDisplay').innerText = currentUser.role.toUpperCase();
             document.getElementById('userNameDisplay').innerText = currentUser.full_name;
             renderNav();
-            refreshSchoolData();
         }
         function getNavItems() {
-            let role = currentUser.role;
-            if (role === "dg_ceo" || role === "umc") return ["dashboard","students","enroll-student","teachers","enroll-staff","fees","boarding","payment-report","teachers-payroll","budget-report","budget-management","manage-slides"];
-            if (role === "daf") return ["dashboard","fees","payment-report","teachers-payroll","boarding","budget-report"];
-            if (role === "drpa") return ["dashboard","students","academic-performance","section-analysis","research-notes","grade-students"];
-            if (role === "do") return ["dashboard","fees","boarding","teachers"];
-            if (role === "der") return ["dashboard","students","teachers","section-analysis"];
-            if (role === "headteacher") return ["dashboard","section-students","section-fees","enroll-student"];
-            if (role === "teacher") return ["dashboard","my-class","grade-students-teacher","attendance"];
-            if (role === "parent") return ["my-children","payment-history"];
+            const role = currentUser.role;
+            if(role === "dg_ceo" || role === "umc") return ["dashboard","students","enroll-student","teachers","enroll-staff","fees","boarding","payment-report","budget-report","budget-management","manage-slides"];
+            if(role === "daf") return ["dashboard","fees","payment-report","teachers-payroll","boarding","budget-report"];
+            if(role === "drpa") return ["dashboard","students","academic-performance","section-analysis","research-notes","grade-students"];
+            if(role === "do") return ["dashboard","fees","boarding","teachers"];
+            if(role === "der") return ["dashboard","students","teachers","section-analysis"];
+            if(role === "headteacher") return ["dashboard","section-students","section-fees","enroll-student"];
+            if(role === "teacher") return ["dashboard","my-class","grade-students-teacher","attendance"];
+            if(role === "parent") return ["my-children","payment-history"];
             return ["dashboard"];
         }
         function renderNav() {
-            let labels = { dashboard:"Dashboard", students:"Students","enroll-student":"Enroll", teachers:"Staff","enroll-staff":"Add Staff", fees:"Fees", boarding:"Boarding","payment-report":"Payments","teachers-payroll":"Payroll","budget-report":"Budget","budget-management":"Edit Budget","academic-performance":"Performance","section-analysis":"Section Analysis","research-notes":"Research","grade-students":"Grade All","my-class":"My Class", attendance:"Attendance","section-students":"Section Students","section-fees":"Section Fees","my-children":"My Children","payment-history":"Payments","grade-students-teacher":"Grade Class","manage-slides":"Slideshow" };
-            let items = getNavItems();
-            let html = items.map(v=>`<a href="#" data-view="${v}" class="nav-link flex items-center space-x-3 px-4 py-2.5 rounded-lg text-slate-200 hover:bg-white/10"><i class="fas ${v==='dashboard'?'fa-tachometer-alt':v==='manage-slides'?'fa-images':'fa-folder'} w-5"></i><span>${labels[v]||v}</span></a>`).join('');
-            document.getElementById('dynamicNav').innerHTML = html;
+            const labels = { dashboard:"🏠 Dashboard", students:"📚 Students","enroll-student":"🎓 Enroll", teachers:"👥 Staff","enroll-staff":"➕ Staff", fees:"💰 Fees", boarding:"🏠 Boarding","payment-report":"📄 Payments","teachers-payroll":"💰 Payroll","budget-report":"📊 Budget","budget-management":"✍️ Write Budget","academic-performance":"📈 Performance","section-analysis":"📊 Analysis","research-notes":"📝 Research","grade-students":"✏️ Grades","my-class":"📌 My Class", attendance:"✅ Attendance","section-students":"📖 Section","section-fees":"⏳ Fees","my-children":"👨‍👧 Children","payment-history":"💸 History","grade-students-teacher":"✍️ Grade Subjects","manage-slides":"🖼️ Manage Slides" };
+            const items = getNavItems();
+            const html = items.map(v=>`<a href="#" data-view="${v}" class="nav-link flex items-center space-x-3 px-4 py-2.5 rounded-lg text-slate-200 hover:bg-white/10 transition"><i class="fas ${v==='dashboard'?'fa-tachometer-alt':v==='manage-slides'?'fa-images':'fa-folder'} w-5"></i><span>${labels[v]||v}</span></a>`).join('');
+            document.getElementById("dynamicNav").innerHTML = html;
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
-                    link.classList.add('active');
-                    renderContentView(link.dataset.view);
+                    const view = link.getAttribute('data-view');
+                    renderContentView(view);
+                    document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('bg-white/10','border-l-4','border-amber-400'));
+                    link.classList.add('bg-white/10','border-l-4','border-amber-400');
                 });
             });
-            if (items.length) renderContentView(items[0]);
+            if(items.length) renderContentView(items[0]);
         }
 
-        // ----- INIT & EVENT LISTENERS -----
-        window.payFeeAction = payFeeAction;
-        window.resetPasswordAction = resetPasswordAction;
-        window.deleteSlide = deleteSlide;
-        window.updateGrades = (sid) => {};
-        window.updateTeacherGrade = (sid) => {};
-
-        async function init() {
-            loadSlides();
+        // ==================== INITIALIZATION ====================
+        async function initApp() {
+            loadSlidesFromStorage();
             rebuildSlideshow();
             resetAutoSlide();
-            await checkSession();
-            if (!currentUser) {
+            
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (session) {
+                await checkSession();
+                document.getElementById('landingPage').style.display = 'none';
+                document.getElementById('appContainer').classList.remove('hidden');
+            } else {
                 document.getElementById('landingPage').style.display = 'block';
                 document.getElementById('appContainer').classList.add('hidden');
             }
-            setInterval(() => {
-                let now = new Date();
-                if (document.getElementById('liveTime')) document.getElementById('liveTime').innerText = now.toLocaleTimeString();
-                if (document.getElementById('liveDate')) document.getElementById('liveDate').innerText = now.toLocaleDateString();
-            }, 1000);
         }
+
+        // ==================== AUTH STATE CHANGE LISTENER ====================
+        supabaseClient.auth.onAuthStateChange((event, session) => {
+            if (event === "PASSWORD_RECOVERY") {
+                const newPassword = prompt("Please enter your new password:");
+                if (newPassword) {
+                    updateUserPassword(newPassword);
+                }
+            }
+        });
+
+        // ==================== UTILITIES ====================
+        function updateDateTime() {
+            let now = new Date();
+            if(document.getElementById('liveTime')) document.getElementById('liveTime').innerText = now.toLocaleTimeString('en-NG');
+            if(document.getElementById('liveDate')) document.getElementById('liveDate').innerText = now.toLocaleDateString('en-NG',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+        }
+        setInterval(updateDateTime,1000); updateDateTime();
+        // Defer weather and location to avoid blocking (performance)
+        setTimeout(() => {
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(async(pos)=>{
+                    try{
+                        let res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&current_weather=true`);
+                        let data = await res.json();
+                        if(document.getElementById('weatherTemp')) document.getElementById('weatherTemp').innerText = Math.round(data.current_weather.temperature);
+                        let desc = data.current_weather.weathercode>70?"Rainy":(data.current_weather.weathercode>50?"Cloudy":"Clear");
+                        document.getElementById('weatherDesc').innerText = desc;
+                    } catch(e){}
+                });
+            }
+        }, 2000);
+
+        // ==================== EVENT LISTENERS ====================
         document.getElementById('loginBtnHero')?.addEventListener('click',()=>{ document.getElementById('landingPage').style.display='none'; document.getElementById('loginScreen').style.display='flex'; });
         document.getElementById('loginBtnFooter')?.addEventListener('click',()=>{ document.getElementById('landingPage').style.display='none'; document.getElementById('loginScreen').style.display='flex'; });
         document.getElementById('closeLoginBtn')?.addEventListener('click',()=>{ document.getElementById('loginScreen').style.display='none'; document.getElementById('landingPage').style.display='block'; });
@@ -583,21 +808,24 @@
         });
         document.getElementById('authForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
-            let email = document.getElementById('authEmail').value;
-            let pwd = document.getElementById('authPassword').value;
-            let isLogin = document.getElementById('authTitle').innerText.includes('Login');
-            if (isLogin) await loginUser(email, pwd);
+            const email = document.getElementById('authEmail').value;
+            const pwd = document.getElementById('authPassword').value;
+            const isLoginMode = document.getElementById('authTitle').innerText.includes('Login');
+            if(isLoginMode) await loginUser(email, pwd);
             else {
-                let name = document.getElementById('regFullName').value;
-                let role = document.getElementById('authRole').value;
-                if (name) await registerUser(email, pwd, name, role);
+                const name = document.getElementById('regFullName').value;
+                const role = document.getElementById('authRole').value;
+                if(name) await registerUser(email, pwd, name, role);
                 else alert("Full name required");
             }
         });
+        window.resetPasswordAction = resetPasswordAction;
+        window.payFeeAction = payFeeAction;
+        
         document.getElementById('prevSlide')?.addEventListener('click', prevSlide);
         document.getElementById('nextSlide')?.addEventListener('click', nextSlide);
-        init();
+        
+        initApp();
     </script>
-   
 </body>
 </html>
