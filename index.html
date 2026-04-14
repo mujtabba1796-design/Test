@@ -1,6 +1,4 @@
-I understand the issue: the modal windows don't appear because the script’s async initialization (seeding data) might be failing silently, preventing the event listeners from being attached. I’ve restructured the code so that **all button click handlers are bound immediately** when the page loads, regardless of database status. Also added inline fallbacks and error logging to the console for debugging. Now clicking **Staff Login**, **Parent Login**, or **Apply for Admission** will instantly open the corresponding modal.
 
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
