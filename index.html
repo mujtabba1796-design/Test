@@ -157,7 +157,7 @@
     // ==================== SUPABASE CLIENT ====================
     const SUPABASE_URL = 'https://akevrbzcalwmiitcmifa.supabase.co';       
     const SUPABASE_ANON_KEY = 'sb_publishable_yDEY-ha-iRr00-ddBJytNw_26sGELP_'; 
-    const supabase = supabaseClient.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+   const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     let currentUser = null;
     let schoolData = { students: [], teachers: [], feeTransactions: [], attendanceRecords: [], operationalBudgets: [], applications: [] };
