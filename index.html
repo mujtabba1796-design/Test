@@ -8,11 +8,9 @@
     <!-- Supabase JS Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // Supabase configuration (replace with your own keys in production)
-        // IMPORTANT: Use environment variables or a secure config in production
-        const SUPABASE_URL = 'https://roqeggpzmuupunflubzn.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_V17fIlV5hsC1Jkd8QLoKuw_MX_2OUAz';
-        window.supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const SUPABASE_URL = 'https://enpqmkdsbomufdowlwdw.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_YUsAMF5L77zOBM1cSfBvGg_wJys3ifW';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     </script>
     
     <title>Al‑Istiqaamah Flying Wings Academy | Production Portal</title>
@@ -25,7 +23,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Your existing CSS styles remain unchanged */
         @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap');
         * { font-family: 'Inter', sans-serif; }
         .hero-pattern { background: linear-gradient(135deg, #0a2e2c 0%, #0f3b38 100%); }
@@ -34,9 +31,8 @@
         .sidebar { background: #0f2e2c; transition: transform 0.2s ease, width 0.2s; z-index: 45; }
         .nav-link-active, .nav-link:hover { background: rgba(255,255,255,0.12); border-left: 4px solid #f59e0b; }
         .att-check { width: 20px; height: 20px; accent-color: #10b981; }
-        .carousel-slide { transition: opacity 0.5s ease-in-out; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-        .carousel-container { position: relative; height: 100%; width: 100%; }
-        .carousel-btn { background: rgba(0,0,0,0.5); transition: all 0.2s; z-index: 20; }
+        .carousel-slide { transition: opacity 0.5s ease-in-out; }
+        .carousel-btn { background: rgba(0,0,0,0.5); transition: all 0.2s; }
         .carousel-btn:hover { background: rgba(0,0,0,0.8); }
         .dot { transition: all 0.2s; cursor: pointer; }
         .grade-input { width: 80px; padding: 6px; border-radius: 6px; border: 1px solid #ccc; text-align: center; }
@@ -68,7 +64,6 @@
         .cookie-consent button:hover { background: #d97706; transform: scale(1.02); }
         .powered-by { margin-top: 1rem; text-align: center; font-size: 0.8rem; background: linear-gradient(135deg, #0f172a, #1e293b); padding: 8px; border-radius: 40px; display: inline-block; width: auto; margin-left: auto; margin-right: auto; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
         .powered-by i { color: #f59e0b; margin-right: 6px; }
-        .admin-setup-card { background: #fef3c7; border: 2px solid #f59e0b; }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -103,6 +98,7 @@
                         <div class="flex flex-wrap gap-4 mt-6">
                             <button id="loginBtnHero" class="bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold px-6 py-2.5 rounded-full shadow-lg transition inline-flex items-center gap-2"><i class="fas fa-chalkboard-user"></i> Staff / Admin Login</button>
                             <button id="parentLoginBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded-full shadow-lg transition inline-flex items-center gap-2"><i class="fas fa-user-friends"></i> Parent Login</button>
+                            <button id="adminSignupBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2.5 rounded-full shadow-lg transition inline-flex items-center gap-2"><i class="fas fa-user-shield"></i> Admin Sign Up</button>
                         </div>
                     </div>
                     <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 shadow-xl border border-white/20 w-80">
@@ -116,12 +112,10 @@
 
         <!-- Slideshow container -->
         <div class="container mx-auto px-6 py-12"><div class="text-center mb-6"><h2 class="text-3xl font-bold text-gray-800">📸 Our Campus <span class="text-amber-600">in Focus</span></h2></div>
-        <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-gray-900" style="height: 400px; md:h-[500px];">
-            <div id="slidesContainer" class="relative w-full h-full"></div>
-            <button id="prevSlide" class="carousel-btn absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl p-2 rounded-full w-10 h-10 flex items-center justify-center z-20"><i class="fas fa-chevron-left"></i></button>
-            <button id="nextSlide" class="carousel-btn absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl p-2 rounded-full w-10 h-10 flex items-center justify-center z-20"><i class="fas fa-chevron-right"></i></button>
-            <div id="dotsContainer" class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-20"></div>
-        </div></div>
+        <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-gray-900"><div id="slidesContainer" class="relative h-96 md:h-[500px] w-full"></div>
+        <button id="prevSlide" class="carousel-btn absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl p-2 rounded-full w-10 h-10 flex items-center justify-center z-10"><i class="fas fa-chevron-left"></i></button>
+        <button id="nextSlide" class="carousel-btn absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl p-2 rounded-full w-10 h-10 flex items-center justify-center z-10"><i class="fas fa-chevron-right"></i></button>
+        <div id="dotsContainer" class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10"></div></div></div>
         
         <div class="container mx-auto px-6 py-10"><div class="grid md:grid-cols-2 gap-10"><div class="bg-white rounded-2xl shadow-xl p-8 card-hover border-t-8 border-emerald-600"><div class="text-emerald-600 text-4xl mb-4"><i class="fas fa-eye"></i></div><h2 class="text-2xl font-bold text-gray-800 mb-3">🌙 Vision Statement</h2><p class="text-gray-700 italic">To cultivate a community of believers and learners who embody faith, knowledge, and inspiration — beacons of guidance and service.</p></div>
         <div class="bg-white rounded-2xl shadow-xl p-8 card-hover border-t-8 border-amber-500"><div class="text-amber-500 text-4xl mb-4"><i class="fas fa-bullhorn"></i></div><h2 class="text-2xl font-bold text-gray-800 mb-3">🌿 Mission Statement</h2><p class="text-gray-700">Promoting academic excellence, leadership, and Islamic values, nurturing learners who live by the Qur’an and Sunnah.</p></div></div></div>
@@ -130,6 +124,7 @@
         
         <div class="bg-emerald-900 text-white py-12 text-center"><div class="container mx-auto px-6"><h2 class="text-3xl font-bold mb-3">Begin Your Child's Journey of Faith & Excellence</h2><p class="mb-6">Admissions open. Contact our admission office.</p><div class="flex flex-wrap justify-center gap-4"><a href="tel:08067990749" class="bg-amber-500 hover:bg-amber-600 text-gray-900 px-6 py-3 rounded-full inline-flex gap-2 shadow-lg">📞 Call Us</a><button id="loginBtnFooter" class="border-2 border-amber-400 hover:bg-amber-400 hover:text-gray-900 px-6 py-3 rounded-full font-semibold">👥 Staff Dashboard</button><button id="applyNowBtn" class="apply-btn text-gray-900 font-bold px-8 py-3 rounded-full shadow-lg">📝 Apply Now</button></div></div></div>
         
+        <!-- FOOTER with updated date & powered by -->
         <footer class="bg-slate-900 text-gray-400 py-8 text-center text-sm">
             <div>© 2026 Al‑Istiqaamah Flying Wings Academy — Samaru, Zaria, Kaduna State. RC: 1983033</div>
             <div class="powered-by mt-3">
@@ -138,24 +133,19 @@
         </footer>
     </div>
 
-    <!-- STAFF LOGIN MODAL (Username-based) -->
-    <div id="loginScreen" class="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-auto" style="display: none; background: rgba(0,0,0,0.7);">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative"><div class="text-center mb-4"><i class="fas fa-dove text-5xl text-amber-600"></i><h2 class="text-2xl font-bold">Staff / Admin Login</h2><p class="text-sm text-gray-500">Enter your username and password</p></div>
-        <form id="authForm"><input type="text" id="authUsername" placeholder="Username" class="w-full border p-2 rounded mb-3" required><input type="password" id="authPassword" placeholder="Password" class="w-full border p-2 rounded mb-1" required><div class="mb-5 text-right"><button type="button" onclick="resetPasswordAction()" class="text-xs text-amber-600">Forgot Password?</button></div><button type="submit" class="w-full bg-amber-600 text-white py-2 rounded-lg font-bold">Login</button></form>
-        <div id="adminSetupHint" class="mt-4 text-center text-xs text-gray-500 border-t pt-3 hidden"><i class="fas fa-info-circle"></i> No admin accounts found. <button id="showSetupAdminBtn" class="text-amber-600 font-semibold">Create first admin</button></div>
-        <button id="closeLoginBtn" class="absolute top-3 right-4 text-gray-400 text-2xl">&times;</button></div>
+    <!-- STAFF LOGIN MODAL -->
+    <div id="loginScreen" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display: none; background: rgba(0,0,0,0.7);">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative"><div class="text-center mb-4"><i class="fas fa-dove text-5xl text-amber-600"></i><h2 class="text-2xl font-bold">Staff / Admin Login</h2><p class="text-sm text-gray-500">Use email & password</p></div><form id="authForm"><input type="email" id="authEmail" placeholder="Email" class="w-full border p-2 rounded mb-3" required><input type="password" id="authPassword" placeholder="Password" class="w-full border p-2 rounded mb-1" required><div class="mb-5 text-right"><button type="button" onclick="resetPasswordAction()" class="text-xs text-amber-600">Forgot Password?</button></div><button type="submit" class="w-full bg-amber-600 text-white py-2 rounded-lg font-bold">Login</button></form><button id="closeLoginBtn" class="absolute top-3 right-4 text-gray-400 text-2xl">&times;</button></div>
     </div>
 
-    <!-- Admin creation modal -->
-    <div id="adminSetupModal" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display: none; background: rgba(0,0,0,0.7);">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative"><div class="text-center mb-4"><i class="fas fa-user-shield text-5xl text-amber-600"></i><h2 class="text-2xl font-bold">Setup Administrator</h2><p class="text-sm text-gray-500">Create the first Director General (DG/CEO) account</p></div>
-        <form id="adminSetupForm"><input type="text" id="adminUsername" placeholder="Username" required class="w-full border p-2 rounded mb-3"><input type="text" id="adminFullName" placeholder="Full Name" required class="w-full border p-2 rounded mb-3"><input type="email" id="adminEmail" placeholder="Email Address" required class="w-full border p-2 rounded mb-3"><input type="password" id="adminPassword" placeholder="Password (min 6 chars)" required class="w-full border p-2 rounded mb-3"><button type="submit" class="w-full bg-emerald-600 text-white py-2 rounded-lg font-bold">Create Admin Account</button></form>
-        <button id="closeAdminSetupBtn" class="absolute top-3 right-4 text-gray-400 text-2xl">&times;</button></div>
-    </div>
-
-    <!-- PARENT LOGIN MODAL (using student registration number as username) -->
+    <!-- PARENT LOGIN MODAL -->
     <div id="parentLoginModal" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display: none; background: rgba(0,0,0,0.7);">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative"><div class="text-center mb-4"><i class="fas fa-user-graduate text-5xl text-emerald-600"></i><h2 class="text-2xl font-bold">Parent Portal</h2><p class="text-sm text-gray-500">Login with student registration number (username) and password</p></div><form id="parentAuthForm"><input type="text" id="parentUsername" placeholder="Student Registration Number" class="w-full border p-2 rounded mb-3" required><input type="password" id="parentPassword" placeholder="Password" class="w-full border p-2 rounded mb-1" required><div class="text-xs text-gray-400 mb-4">Contact school for parent account credentials.</div><button type="submit" class="w-full bg-emerald-600 text-white py-2 rounded-lg font-bold">Access Dashboard</button></form><button id="closeParentLoginBtn" class="absolute top-3 right-4 text-gray-400 text-2xl">&times;</button></div>
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative"><div class="text-center mb-4"><i class="fas fa-user-graduate text-5xl text-emerald-600"></i><h2 class="text-2xl font-bold">Parent Portal</h2><p class="text-sm text-gray-500">Login with student registration number</p></div><form id="parentAuthForm"><input type="text" id="parentRegNo" placeholder="Student Registration Number" class="w-full border p-2 rounded mb-3" required><input type="password" id="parentPassword" value="al123" placeholder="Password" class="w-full border p-2 rounded mb-1" required><div class="text-xs text-gray-400 mb-4">Default password: al123</div><button type="submit" class="w-full bg-emerald-600 text-white py-2 rounded-lg font-bold">Access Dashboard</button></form><button id="closeParentLoginBtn" class="absolute top-3 right-4 text-gray-400 text-2xl">&times;</button></div>
+    </div>
+
+    <!-- ADMIN SIGNUP MODAL (NEW) -->
+    <div id="adminSignupModal" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display: none; background: rgba(0,0,0,0.7);">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative"><div class="text-center mb-4"><i class="fas fa-user-shield text-5xl text-indigo-600"></i><h2 class="text-2xl font-bold">Admin Registration</h2><p class="text-sm text-gray-500">Create DG/CEO or UMC Account</p></div><form id="adminSignupForm"><input type="text" id="adminFullName" placeholder="Full Name" class="w-full border p-2 rounded mb-3" required><input type="email" id="adminEmail" placeholder="Email Address" class="w-full border p-2 rounded mb-3" required><input type="password" id="adminPassword" placeholder="Password" class="w-full border p-2 rounded mb-3" required><select id="adminRole" class="w-full border p-2 rounded mb-3"><option value="dg_ceo">Director General (DG/CEO)</option><option value="umc">UMC (Management)</option></select><input type="text" id="adminRegCode" placeholder="Admin Registration Code" class="w-full border p-2 rounded mb-3" required><div class="text-xs text-gray-500 mb-2">* Registration code required: <span class="font-mono font-bold">ALIFLY2026</span></div><button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-lg font-bold">Create Admin Account</button></form><button id="closeAdminSignupBtn" class="absolute top-3 right-4 text-gray-400 text-2xl">&times;</button></div>
     </div>
 
     <!-- DASHBOARD APP -->
@@ -166,649 +156,98 @@
     <div id="toastMsg" class="toast-notify"></div>
 
     <script>
-        // ==================== MODULAR PRODUCTION CODE ====================
-        // GLOBALS
+        // ==================== CONFIG & GLOBALS ====================
         const SECTIONS = ['regular islamiyyah', 'regular memorization', 'intensive memorization', 'integrated islamic basic section', 'advance section', 'woman section'];
         const STAFF_SECTIONS = [...SECTIONS, 'Oversight (UMC/Directors - all sections)'];
         const ROLES = [
             { value: 'dg_ceo', label: 'Director General (DG/CEO)' }, { value: 'umc', label: 'UMC (Management)' },
             { value: 'daf', label: 'DAF (Director of Finance)' }, { value: 'dprpa', label: 'DPRPA (Director of Planning)' },
             { value: 'der', label: 'DER (Director of Education)' }, { value: 'do', label: 'DO (Director of Operations)' },
-            { value: 'headteacher', label: 'Head Teacher' }, { value: 'teacher', label: 'Teacher' }, 
-            { value: 'parent', label: 'Parent' }
+            { value: 'headteacher', label: 'Head Teacher' }, { value: 'teacher', label: 'Teacher' }
         ];
-        
         let schoolData = { students: [], teachers: [] };
         let currentUser = null;
         let slidesData = [], currentSlideIndex = 0, slideInterval;
 
-        // Helper: Show Toast Message
-        function showToast(msg, isError=false) { 
-            let t = document.getElementById('toastMsg'); 
-            t.innerText = msg; 
-            t.style.display = 'block'; 
-            t.style.background = isError ? '#dc2626' : '#10b981'; 
-            setTimeout(()=> t.style.display = 'none', 4000); 
-        }
+        function showToast(msg, isError=false) { let t = document.getElementById('toastMsg'); t.innerText = msg; t.style.display = 'block'; t.style.background = isError ? '#dc2626' : '#10b981'; setTimeout(()=> t.style.display = 'none', 3000); }
 
-        // ========== AUTHENTICATION HELPERS ==========
-        // Map username to email for login
-        async function getEmailFromUsername(username) {
-            const { data, error } = await window.supabaseClient
-                .from('profiles')
-                .select('email')
-                .eq('username', username)
-                .single();
-            if (error || !data) throw new Error('Invalid username');
-            return data.email;
-        }
-
-        // Login with username/password
-        async function loginWithUsername(username, password) {
-            try {
-                const email = await getEmailFromUsername(username);
-                const { data, error } = await window.supabaseClient.auth.signInWithPassword({ email, password });
-                if (error) throw error;
-                const { data: profile } = await window.supabaseClient
-                    .from('profiles')
-                    .select('*')
-                    .eq('id', data.user.id)
-                    .single();
-                if (!profile?.role) throw new Error('No role assigned');
-                currentUser = { ...profile, full_name: profile.full_name, role: profile.role, section: profile.section };
-                if (currentUser.role === 'teacher') currentUser.assignedSection = profile.section || SECTIONS[0];
-                if (currentUser.role === 'parent') {
-                    // Load linked student info
-                    const { data: student } = await window.supabaseClient
-                        .from('students')
-                        .select('*')
-                        .eq('id', profile.student_id)
-                        .single();
-                    if (student) {
-                        currentUser.studentId = student.id;
-                        currentUser.studentName = student.name;
-                    }
-                }
-                await refreshSchoolData();
-                showDashboard();
-            } catch(e) {
-                showToast("Login failed: "+e.message, true);
+        // ========== SUPABASE SLIDESHOW FUNCTIONS ==========
+        async function loadSlidesFromSupabase() {
+            const { data, error } = await supabaseClient.from('slides').select('*').order('created_at', { ascending: true });
+            if (error && error.code === '42P01') { 
+                slidesData = [{ url: "https://picsum.photos/id/20/1200/600", caption: "Modern Classrooms" },{ url: "https://picsum.photos/id/30/1200/600", caption: "Qur’an Memorization" }];
+                rebuildSlideshow();
+                return;
             }
+            if (error) { showToast("Error loading slides: "+error.message, true); return; }
+            slidesData = data.map(s => ({ url: s.image_url, caption: s.caption, id: s.id }));
+            if (slidesData.length === 0) slidesData = [{ url: "https://picsum.photos/id/20/1200/600", caption: "Modern Classrooms" },{ url: "https://picsum.photos/id/30/1200/600", caption: "Qur’an Memorization" }];
+            rebuildSlideshow();
         }
+        async function uploadSlideToSupabase(file, caption) { if (!currentUser) { showToast("Please login", true); return false; } const fileExt = file.name.split('.').pop(); const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`; const { error: uploadError } = await supabaseClient.storage.from('school-slides').upload(fileName, file); if (uploadError) { showToast("Upload error: "+uploadError.message, true); return false; } const { data: publicUrlData } = supabaseClient.storage.from('school-slides').getPublicUrl(fileName); const imageUrl = publicUrlData.publicUrl; const { error: insertError } = await supabaseClient.from('slides').insert([{ image_url: imageUrl, caption: caption || "Slide" }]); if (insertError) { showToast("Metadata error: "+insertError.message, true); return false; } showToast("Slide uploaded!"); await loadSlidesFromSupabase(); return true; }
+        async function deleteSlideFromSupabase(slideId, imageUrl) { const urlParts = imageUrl.split('/'); const filePath = urlParts.slice(urlParts.indexOf('school-slides')+1).join('/'); if (filePath) await supabaseClient.storage.from('school-slides').remove([filePath]); const { error } = await supabaseClient.from('slides').delete().eq('id', slideId); if (error) showToast("Delete error: "+error.message, true); else { showToast("Slide deleted"); await loadSlidesFromSupabase(); } }
+        function rebuildSlideshow() { const container = document.getElementById('slidesContainer'), dots = document.getElementById('dotsContainer'); if(!container) return; container.innerHTML = ''; dots.innerHTML = ''; slidesData.forEach((slide, idx) => { let div = document.createElement('div'); div.className = `carousel-slide absolute inset-0 w-full h-full transition-opacity duration-500 ${idx===currentSlideIndex?'opacity-100 z-10':'opacity-0 z-0'}`; div.style.backgroundImage = `linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('${slide.url}')`; div.style.backgroundSize = 'cover'; let cap = document.createElement('div'); cap.className = 'absolute bottom-0 bg-black/60 text-white p-2 w-full text-center'; cap.innerText = slide.caption; div.appendChild(cap); container.appendChild(div); let dot = document.createElement('button'); dot.className = `dot w-3 h-3 rounded-full mx-1 ${idx===currentSlideIndex?'bg-amber-400 w-4':'bg-white/60'}`; dot.addEventListener('click', () => goToSlide(idx)); dots.appendChild(dot); }); resetAutoSlide(); }
+        function goToSlide(index) { let slides = document.querySelectorAll('#slidesContainer .carousel-slide'); if(!slides.length) return; if(index<0) index=slides.length-1; if(index>=slides.length) index=0; slides[currentSlideIndex]?.classList.remove('opacity-100','z-10'); slides[currentSlideIndex]?.classList.add('opacity-0','z-0'); slides[index]?.classList.remove('opacity-0','z-0'); slides[index]?.classList.add('opacity-100','z-10'); document.querySelectorAll('#dotsContainer .dot').forEach((d,i)=>{ if(i===index) d.classList.add('bg-amber-400','w-4'); else d.classList.remove('bg-amber-400','w-4'); }); currentSlideIndex = index; resetAutoSlide(); }
+        function resetAutoSlide() { if(slideInterval) clearInterval(slideInterval); if(slidesData.length>1) slideInterval = setInterval(()=>goToSlide(currentSlideIndex+1),5000); }
 
-        // Parent login using student registration number as username
-        async function parentLogin(regNumber, password) {
-            try {
-                // Find parent profile where username = regNumber
-                const { data: parentProfile, error: profileError } = await window.supabaseClient
-                    .from('profiles')
-                    .select('*')
-                    .eq('username', regNumber)
-                    .eq('role', 'parent')
-                    .single();
-                if (profileError || !parentProfile) throw new Error('Invalid parent credentials');
-                // Now login using associated email
-                const { data, error } = await window.supabaseClient.auth.signInWithPassword({ 
-                    email: parentProfile.email, 
-                    password 
-                });
-                if (error) throw error;
-                // Fetch full profile
-                const { data: fullProfile } = await window.supabaseClient
-                    .from('profiles')
-                    .select('*')
-                    .eq('id', data.user.id)
-                    .single();
-                currentUser = { ...fullProfile, full_name: fullProfile.full_name, role: 'parent' };
-                // Get linked student
-                const { data: student } = await window.supabaseClient
-                    .from('students')
-                    .select('*')
-                    .eq('id', fullProfile.student_id)
-                    .single();
-                if (student) {
-                    currentUser.studentId = student.id;
-                    currentUser.studentName = student.name;
-                }
-                await refreshSchoolData();
-                showDashboard();
-            } catch(e) {
-                showToast("Parent login failed: "+e.message, true);
-            }
-        }
-
-        // Logout
-        async function logoutUser() {
-            await window.supabaseClient.auth.signOut();
-            currentUser = null;
-            document.getElementById('appContainer').classList.add('hidden');
-            document.getElementById('landingPage').style.display = 'block';
-            closeMobileSidebar();
-        }
-
-        // Reset password
-        window.resetPasswordAction = async () => {
-            const username = document.getElementById('authUsername').value;
-            if(!username){ showToast("Enter username", true); return; }
-            try {
-                const email = await getEmailFromUsername(username);
-                const { error } = await window.supabaseClient.auth.resetPasswordForEmail(email);
-                if(error) throw error;
-                showToast("Password reset link sent to your email!");
-            } catch(e) {
-                showToast(e.message, true);
-            }
-        };
-
-        // Check if any admin exists
-        async function checkForAnyAdmin() {
-            const { data, error } = await window.supabaseClient
-                .from('profiles')
-                .select('id')
-                .in('role', ['dg_ceo', 'umc'])
-                .limit(1);
-            if (!error && data && data.length === 0) {
-                document.getElementById('adminSetupHint')?.classList.remove('hidden');
-            } else {
-                document.getElementById('adminSetupHint')?.classList.add('hidden');
-            }
-        }
-
-        // Create admin account (username + email + password)
-        async function createAdminAccount(username, fullName, email, password) {
-            // Check username uniqueness
-            const { data: existing } = await window.supabaseClient
-                .from('profiles')
-                .select('username')
-                .eq('username', username);
-            if (existing && existing.length > 0) throw new Error('Username already taken');
-            
-            const { data: authData, error: signUpError } = await window.supabaseClient.auth.signUp({ email, password });
-            if (signUpError) throw signUpError;
-            
-            const { error: profileError } = await window.supabaseClient
-                .from('profiles')
-                .insert([{ 
-                    id: authData.user.id, 
-                    username: username,
-                    full_name: fullName, 
-                    email, 
-                    role: 'dg_ceo', 
-                    section: 'Oversight (UMC/Directors - all sections)',
-                    created_at: new Date() 
-                }]);
-            if (profileError) throw profileError;
-            showToast("Admin account created! Please login now.");
-            document.getElementById('adminSetupModal').style.display = 'none';
-            document.getElementById('loginScreen').style.display = 'flex';
-            await checkForAnyAdmin();
-        }
-
-        // ========== DATABASE OPERATIONS ==========
+        // ========== CORE SCHOOL FUNCTIONS ==========
         async function refreshSchoolData() {
-            // Fetch students (with RLS, will filter based on role)
-            let query = window.supabaseClient.from('students').select('*');
-            if (currentUser?.role === 'teacher' && currentUser.assignedSection) {
-                query = query.eq('section', currentUser.assignedSection);
-            } else if (currentUser?.role === 'parent' && currentUser.studentId) {
-                query = query.eq('id', currentUser.studentId);
-            }
-            const { data: students } = await query;
-            if (students) schoolData.students = students.map(s => ({ 
-                ...s, 
-                feeStatus: s.fee_status, 
-                attendance: s.attendance_pct || 0, 
-                grades: s.grades || {}, 
-                parent_name: s.parent_name || '', 
-                reg_number: s.reg_number || '', 
-                status: s.status || 'active' 
-            }));
-            
-            // Fetch teachers (admins can see all)
-            let teacherQuery = window.supabaseClient.from('teachers').select('*');
-            if (currentUser?.role === 'teacher') {
-                teacherQuery = teacherQuery.eq('email', currentUser.email);
-            }
-            const { data: teachers } = await teacherQuery;
+            const { data: students } = await supabaseClient.from('students').select('*');
+            if (students) schoolData.students = students.map(s => ({ ...s, feeStatus: s.fee_status, attendance: s.attendance_pct || 0, grades: s.grades || {}, parent_name: s.parent_name || '', reg_number: s.reg_number || '', status: s.status || 'active' }));
+            const { data: teachers } = await supabaseClient.from('teachers').select('*');
             if (teachers) schoolData.teachers = teachers;
         }
-
-        async function addStudentLogic(reg_number, name, parent_name, level, section, fee_status) {
-            if (!name?.trim() || name.length<3) { showToast("Student name min 3 chars", true); return false; }
-            if (isNaN(level) || level<1 || level>12) { showToast("Level 1-12", true); return false; }
-            if (!reg_number.trim()) { showToast("Reg number required", true); return false; }
-            if (schoolData.students.find(s=>s.reg_number===reg_number)) { showToast("Reg number exists", true); return false; }
-            
-            const { error } = await window.supabaseClient.from('students').insert([{ 
-                reg_number, 
-                name: name.trim(), 
-                parent_name: parent_name.trim(), 
-                level: parseInt(level), 
-                section, 
-                fee_status, 
-                boarding: false, 
-                attendance_pct: 0, 
-                grades: {}, 
-                status: 'active' 
-            }]);
-            if (error) { showToast("Error: "+error.message, true); return false; }
-            await refreshSchoolData();
-            showToast(`Student ${name} enrolled`);
-            return true;
-        }
-
-        window.deleteStudent = async (id) => {
-            if(confirm("Delete permanently?")){ 
-                await window.supabaseClient.from('students').delete().eq('id',id); 
-                await refreshSchoolData(); 
-                renderContentView("students"); 
-            }
-        };
+        async function addStudentLogic(reg_number, name, parent_name, level, section, fee_status) { if (!name?.trim() || name.length<3) { showToast("Student name min 3 chars", true); return false; } if (isNaN(level) || level<1 || level>12) { showToast("Level 1-12", true); return false; } if (!reg_number.trim()) { showToast("Registration number required", true); return false; } if (schoolData.students.find(s=>s.reg_number===reg_number)) { showToast("Reg number exists", true); return false; } const { error } = await supabaseClient.from('students').insert([{ reg_number, name: name.trim(), parent_name: parent_name.trim(), level: parseInt(level), section, fee_status, boarding: false, attendance_pct: 0, grades: {}, status: 'active' }]); if (error) { showToast("Error: "+error.message, true); return false; } await refreshSchoolData(); showToast(`Student ${name} enrolled`); return true; }
+        async function deleteStudent(id) { if(confirm("Permanently delete?")){ const {error}=await supabaseClient.from('students').delete().eq('id',id); if(error) showToast(error.message,true); else { await refreshSchoolData(); renderContentView("students"); } } }
+        async function toggleSuspendStudent(id, cur){ const newStatus = cur==='active'?'suspended':'active'; const {error}=await supabaseClient.from('students').update({status:newStatus}).eq('id',id); if(error) showToast(error.message,true); else { await refreshSchoolData(); renderContentView("students"); } }
+        async function enrollStaff(fullName, email, roleValue, section, password, teacherLevel = null) { if(!['dg_ceo','umc'].includes(currentUser?.role)) { showToast("Only DG/CEO or UMC can enroll staff", true); return false; } const { data: existing } = await supabaseClient.from('profiles').select('id').eq('email', email); if (existing?.length) { showToast("Email already used", true); return false; } const { data: authUser, error: signUpError } = await supabaseClient.auth.signUp({ email, password }); if (signUpError) { showToast("Signup error: "+signUpError.message, true); return false; } const roleLabel = ROLES.find(r=>r.value===roleValue)?.label || roleValue; const { error: profileError } = await supabaseClient.from('profiles').insert([{ id: authUser.user.id, full_name: fullName, email, role: roleValue, section, created_at: new Date() }]); if (profileError) { showToast("Profile error: "+profileError.message, true); return false; } const teacherPayload = { name: fullName, email, role: roleLabel, assigned_section: section }; if (roleValue === 'teacher' && teacherLevel) teacherPayload.level = parseInt(teacherLevel); await supabaseClient.from('teachers').insert([teacherPayload]); await refreshSchoolData(); showToast(`Staff ${fullName} enrolled. Email: ${email}, Password: ${password}`); return true; }
+        async function updateStudentGrades(id, grades) { await supabaseClient.from('students').update({ grades }).eq('id', id); await refreshSchoolData(); showToast("Grades saved"); renderContentView("grade-students-teacher"); }
+        async function saveAttendance(attendances) { const today = new Date().toISOString().slice(0,10); for(let a of attendances) await supabaseClient.from('attendance_records').upsert({ student_id: a.studentId, date: today, status: a.status }, { onConflict: 'student_id,date' }); await refreshSchoolData(); showToast("Attendance recorded"); renderContentView("attendance"); }
+        async function recordFeePayment(id, amount) { await supabaseClient.from('students').update({ fee_status: 'Paid' }).eq('id', id); await supabaseClient.from('fee_transactions').insert([{ student_id: id, student_name: schoolData.students.find(s=>s.id===id)?.name, amount, date: new Date().toISOString().slice(0,10) }]); await refreshSchoolData(); showToast("Fee marked paid"); renderContentView("fees"); }
+        async function loginUser(email, password) { try { const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password }); if (error) throw error; const { data: profile } = await supabaseClient.from('profiles').select('*').eq('id', data.user.id).single(); if (!profile?.role) throw new Error("No role assigned"); currentUser = { ...profile, full_name: profile.full_name, role: profile.role, section: profile.section }; if (currentUser.role === 'teacher') currentUser.assignedSection = profile.section || SECTIONS[0]; await refreshSchoolData(); showDashboard(); } catch(e) { showToast("Login failed: "+e.message, true); } }
+        async function parentLogin(regNo, password) { if (password !== "al123") { showToast("Invalid password", true); return; } const student = schoolData.students.find(s => s.reg_number === regNo); if (!student) { showToast("Registration number not found", true); return; } if (student.status === 'suspended') { showToast("Access suspended. Contact school.", true); return; } currentUser = { role: "parent", full_name: `Parent of ${student.name}`, studentId: student.id, studentName: student.name }; showDashboard(); }
+        async function logoutUser() { await supabaseClient.auth.signOut(); currentUser = null; document.getElementById('appContainer').classList.add('hidden'); document.getElementById('landingPage').style.display = 'block'; closeMobileSidebar(); }
+        async function resetPasswordAction() { const email = document.getElementById('authEmail').value; if(!email) { showToast("Enter email", true); return; } const { error } = await supabaseClient.auth.resetPasswordForEmail(email); if(error) showToast(error.message, true); else showToast("Reset link sent!"); }
+        async function adminSignup(fullName, email, password, role, regCode) { const validCode = "ALIFLY2026"; if(regCode !== validCode) { showToast("Invalid admin registration code", true); return false; } const { data: existing } = await supabaseClient.from('profiles').select('id').eq('email', email); if(existing?.length) { showToast("Email already registered", true); return false; } const { data: authUser, error: signUpError } = await supabaseClient.auth.signUp({ email, password }); if (signUpError) { showToast("Signup error: "+signUpError.message, true); return false; } const section = "Oversight (UMC/Directors - all sections)"; const { error: profileError } = await supabaseClient.from('profiles').insert([{ id: authUser.user.id, full_name: fullName, email, role, section, created_at: new Date() }]); if (profileError) { showToast("Profile creation error", true); return false; } showToast(`Admin ${fullName} created! You can now log in.`); document.getElementById('adminSignupModal').style.display = 'none'; return true; }
+        async function checkSession() { const { data: { session } } = await supabaseClient.auth.getSession(); if (session) { const { data: profile } = await supabaseClient.from('profiles').select('*').eq('id', session.user.id).single(); if (profile?.role) { currentUser = { ...profile, full_name: profile.full_name, role: profile.role, section: profile.section }; await refreshSchoolData(); showDashboard(); return; } } document.getElementById('landingPage').style.display = 'block'; document.getElementById('appContainer').classList.add('hidden'); }
+        function showDashboard() { document.getElementById('loginScreen').style.display = 'none'; document.getElementById('parentLoginModal').style.display = 'none'; document.getElementById('landingPage').style.display = 'none'; document.getElementById('appContainer').classList.remove('hidden'); document.getElementById('topUserName').innerText = currentUser.full_name || currentUser.name; document.getElementById('topUserRole').innerText = (currentUser.role || '').toUpperCase(); renderNav(); }
         
-        window.toggleSuspendStudent = async (id, cur) => { 
-            const newStatus = cur==='active'?'suspended':'active'; 
-            await window.supabaseClient.from('students').update({status:newStatus}).eq('id',id); 
-            await refreshSchoolData(); 
-            renderContentView("students"); 
-        };
-        
-        async function enrollStaff(username, fullName, email, roleValue, section, password, teacherLevel=null) {
-            if(!['dg_ceo','umc'].includes(currentUser?.role)) { 
-                showToast("Only DG/CEO or UMC can enroll staff", true); 
-                return false; 
-            }
-            // Check username uniqueness
-            const { data: existingUser } = await window.supabaseClient.from('profiles').select('username').eq('username', username);
-            if (existingUser && existingUser.length > 0) { showToast("Username already taken", true); return false; }
-            
-            const { data: existing } = await window.supabaseClient.from('profiles').select('id').eq('email', email); 
-            if (existing?.length) { showToast("Email already used", true); return false; }
-            
-            const { data: authUser, error: signUpError } = await window.supabaseClient.auth.signUp({ email, password }); 
-            if (signUpError) { showToast("Signup error: "+signUpError.message, true); return false; }
-            
-            const roleLabel = ROLES.find(r=>r.value===roleValue)?.label || roleValue;
-            const { error: profileError } = await window.supabaseClient.from('profiles').insert([{ 
-                id: authUser.user.id, 
-                username,
-                full_name: fullName, 
-                email, 
-                role: roleValue, 
-                section, 
-                created_at: new Date() 
-            }]);
-            if (profileError) { showToast("Profile error: "+profileError.message, true); return false; }
-            
-            const teacherPayload = { name: fullName, email, role: roleLabel, assigned_section: section };
-            if (roleValue === 'teacher' && teacherLevel) teacherPayload.level = parseInt(teacherLevel);
-            await window.supabaseClient.from('teachers').insert([teacherPayload]);
-            await refreshSchoolData();
-            showToast(`Staff ${fullName} enrolled. Username: ${username}, Email: ${email}, Password: ${password}`);
-            return true;
-        }
-        
-        async function createParentAccount(studentRegNo, password) {
-            if(!['dg_ceo','umc'].includes(currentUser?.role)) {
-                showToast("Only admin can create parent accounts", true);
-                return false;
-            }
-            // Find student
-            const { data: student, error: studentError } = await window.supabaseClient
-                .from('students')
-                .select('id, name')
-                .eq('reg_number', studentRegNo)
-                .single();
-            if (studentError || !student) {
-                showToast("Student not found", true);
-                return false;
-            }
-            // Check if parent account already exists
-            const { data: existing } = await window.supabaseClient
-                .from('profiles')
-                .select('id')
-                .eq('username', studentRegNo)
-                .eq('role', 'parent');
-            if (existing && existing.length > 0) {
-                showToast("Parent account already exists for this student", true);
-                return false;
-            }
-            // Create email: parent_[regno]@school.local
-            const email = `parent_${studentRegNo}@school.local`;
-            const { data: authUser, error: signUpError } = await window.supabaseClient.auth.signUp({ email, password });
-            if (signUpError) throw signUpError;
-            
-            const { error: profileError } = await window.supabaseClient.from('profiles').insert([{
-                id: authUser.user.id,
-                username: studentRegNo,
-                full_name: `Parent of ${student.name}`,
-                email: email,
-                role: 'parent',
-                student_id: student.id,
-                section: 'Parent',
-                created_at: new Date()
-            }]);
-            if (profileError) throw profileError;
-            showToast(`Parent account created for ${student.name}. Username: ${studentRegNo}, Password: ${password}`);
-            return true;
-        }
-        
-        async function updateStudentGrades(id, grades) { 
-            await window.supabaseClient.from('students').update({ grades }).eq('id', id); 
-            await refreshSchoolData(); 
-            showToast("Grades saved"); 
-            renderContentView("grade-students-teacher"); 
-        }
-        
-        async function saveAttendance(attendances) { 
-            const today = new Date().toISOString().slice(0,10); 
-            for(let a of attendances) {
-                await window.supabaseClient.from('attendance_records').upsert({ 
-                    student_id: a.studentId, 
-                    date: today, 
-                    status: a.status 
-                }, { onConflict: 'student_id,date' });
-            }
-            showToast("Attendance recorded"); 
-        }
-        
-        async function recordFeePayment(id, amount) { 
-            await window.supabaseClient.from('students').update({ fee_status: 'Paid' }).eq('id', id); 
-            await refreshSchoolData(); 
-            showToast("Fee marked paid"); 
-            renderContentView("fees"); 
-        }
-        
-        // ========== SLIDESHOW ==========
-        async function loadSlidesFromSupabase() {
-            try {
-                const { data, error } = await window.supabaseClient.from('slides').select('*').order('created_at', { ascending: true });
-                if (error && error.code === '42P01') { 
-                    console.warn("Slides table missing, using fallback");
-                    slidesData = [
-                        { url: "https://picsum.photos/id/20/1200/600", caption: "Modern Classrooms & Facilities" },
-                        { url: "https://picsum.photos/id/30/1200/600", caption: "Qur’an Memorization Session" },
-                        { url: "https://picsum.photos/id/39/1200/600", caption: "Science & Innovation Lab" }
-                    ];
-                    rebuildSlideshow();
-                    return;
-                }
-                if (error) throw error;
-                if (data && data.length) slidesData = data.map(s => ({ url: s.image_url, caption: s.caption, id: s.id }));
-                else slidesData = [
-                    { url: "https://picsum.photos/id/20/1200/600", caption: "Modern Classrooms & Facilities" },
-                    { url: "https://picsum.photos/id/30/1200/600", caption: "Qur’an Memorization Session" }
-                ];
-                rebuildSlideshow();
-            } catch(e) { 
-                console.error(e); 
-                slidesData = [
-                    { url: "https://picsum.photos/id/20/1200/600", caption: "Modern Classrooms & Facilities" },
-                    { url: "https://picsum.photos/id/30/1200/600", caption: "Qur’an Memorization Session" }
-                ];
-                rebuildSlideshow();
-            }
-        }
-
-        function rebuildSlideshow() {
-            const container = document.getElementById('slidesContainer'), dots = document.getElementById('dotsContainer');
-            if(!container) return;
-            container.innerHTML = ''; dots.innerHTML = '';
-            if(!slidesData.length) slidesData = [{ url: "https://picsum.photos/id/20/1200/600", caption: "Our Campus" }];
-            slidesData.forEach((slide, idx) => {
-                const img = document.createElement('img');
-                img.src = slide.url;
-                img.alt = slide.caption;
-                img.className = `carousel-slide object-cover ${idx===currentSlideIndex?'opacity-100 z-10':'opacity-0 z-0'}`;
-                img.style.transition = 'opacity 0.5s ease-in-out';
-                img.onerror = () => { img.src = 'https://picsum.photos/id/1/1200/600'; };
-                const captionDiv = document.createElement('div');
-                captionDiv.className = 'absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 text-center z-10';
-                captionDiv.innerText = slide.caption;
-                const wrapper = document.createElement('div');
-                wrapper.className = 'absolute inset-0 w-full h-full';
-                wrapper.appendChild(img);
-                wrapper.appendChild(captionDiv);
-                container.appendChild(wrapper);
-                const dot = document.createElement('button');
-                dot.className = `dot w-3 h-3 rounded-full mx-1 ${idx===currentSlideIndex?'bg-amber-400 w-5':'bg-white/60'}`;
-                dot.addEventListener('click', () => goToSlide(idx));
-                dots.appendChild(dot);
-            });
-            resetAutoSlide();
-        }
-
-        function goToSlide(index) {
-            const slides = document.querySelectorAll('#slidesContainer .carousel-slide');
-            if(!slides.length) return;
-            if(index<0) index=slides.length-1;
-            if(index>=slides.length) index=0;
-            slides.forEach((slide, i) => {
-                if(i === index) { slide.classList.add('opacity-100', 'z-10'); slide.classList.remove('opacity-0', 'z-0'); }
-                else { slide.classList.add('opacity-0', 'z-0'); slide.classList.remove('opacity-100', 'z-10'); }
-            });
-            document.querySelectorAll('#dotsContainer .dot').forEach((d,i)=>{
-                if(i===index) d.classList.add('bg-amber-400', 'w-5');
-                else d.classList.remove('bg-amber-400', 'w-5');
-            });
-            currentSlideIndex = index;
-            resetAutoSlide();
-        }
-        
-        function resetAutoSlide() { if(slideInterval) clearInterval(slideInterval); if(slidesData.length>1) slideInterval = setInterval(()=>goToSlide(currentSlideIndex+1), 5000); }
-
-        // ========== UI RENDERING (Core Views) ==========
-        function showDashboard() { 
-            document.getElementById('loginScreen').style.display = 'none'; 
-            document.getElementById('parentLoginModal').style.display = 'none'; 
-            document.getElementById('landingPage').style.display = 'none'; 
-            document.getElementById('appContainer').classList.remove('hidden'); 
-            document.getElementById('topUserName').innerText = currentUser.full_name || currentUser.name; 
-            document.getElementById('topUserRole').innerText = (currentUser.role || '').toUpperCase(); 
-            renderNav(); 
-        }
-        
-        function renderNav() { 
-            let items = []; 
-            if(["dg_ceo","umc","daf","dprpa","der","do"].includes(currentUser.role)) items = ["dashboard","students","enroll-student","fees","payment-report","manage-slides"]; 
-            if(currentUser.role === "dg_ceo" || currentUser.role === "umc") items.push("staff-management", "create-parent"); 
-            if(currentUser.role === "headteacher") items = ["dashboard","section-students","enroll-student","attendance"]; 
-            if(currentUser.role === "teacher") items = ["dashboard","my-class","grade-students-teacher","attendance"]; 
-            if(currentUser.role === "parent") items = ["my-children","payment-history"]; 
-            if(items.length===0) items=["dashboard"]; 
-            const labels = { dashboard:"🏠 Dashboard", students:"📚 Students","enroll-student":"🎓 Enroll Student","staff-management":"👥 Enroll Staff","create-parent":"👪 Create Parent Account","fees":"💰 Fees", "payment-report":"📄 Payments","manage-slides":"🖼️ Manage Slides","grade-students-teacher":"✏️ Student Appraisal","attendance":"✅ Attendance","my-children":"👨‍👧 My Children & Result","payment-history":"💸 History" }; 
-            const html = items.map(v=>`<a href="#" data-view="${v}" class="nav-link flex items-center space-x-3 px-4 py-2.5 rounded-lg text-slate-200 hover:bg-white/10"><i class="fas ${v==='dashboard'?'fa-tachometer-alt':'fa-folder'} w-5"></i><span>${labels[v]||v}</span></a>`).join(''); 
-            document.getElementById("dynamicNav").innerHTML = html; 
-            document.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', (e) => { e.preventDefault(); renderContentView(link.dataset.view); document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('bg-white/10','border-l-4','border-amber-400')); link.classList.add('bg-white/10','border-l-4','border-amber-400'); closeMobileSidebar(); })); 
-            renderContentView(items[0]); 
-        }
-        
-        // Render functions for each view
-        function renderStudentsList() { 
-            let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-4">📋 All Students</h2><div class="overflow-x-auto"><table class="w-full border"><thead><tr class="bg-gray-100"><th>Reg No</th><th>Name</th><th>Parent</th><th>Section</th><th>Level</th><th>Fees</th><th>Status</th><th>Actions</th></tr></thead><tbody>`; 
-            for(let s of schoolData.students) html += `<tr><td class="p-2">${s.reg_number}</td><td class="p-2">${s.name}</td><td class="p-2">${s.parent_name||'-'}</td><td class="p-2">${s.section}</td><td class="p-2">${s.level}</td><td class="${s.feeStatus==='Paid'?'text-green-600':'text-red-500'}">${s.feeStatus}</td><td class="p-2"><span class="${s.status==='active'?'active-badge':'suspended-badge'}">${s.status}</span></td><td class="p-2"><button onclick="window.toggleSuspendStudent('${s.id}','${s.status}')" class="suspend-btn"><i class="fas ${s.status==='active'?'fa-pause':'fa-play'}"></i> ${s.status==='active'?'Suspend':'Activate'}</button> <button onclick="window.deleteStudent('${s.id}')" class="delete-btn"><i class="fas fa-trash"></i> Delete</button></td></tr>`; 
-            html += `</tbody></table></div></div>`; 
-            document.getElementById("mainContent").innerHTML = html; 
-        }
-        
-        function renderEnrollStudent() { 
-            const secOps = SECTIONS.map(s=>`<option value="${s}">${s}</option>`).join(''); 
-            document.getElementById("mainContent").innerHTML = `<div class="bg-white p-6 rounded-xl shadow"><h2 class="text-2xl font-bold mb-4">🎓 Enroll Student</h2><form id="enrollStudentForm" class="space-y-4"><input type="text" id="regNumber" placeholder="Registration Number" required class="border p-2 w-full rounded"><input type="text" id="studentName" placeholder="Student Name" required class="border p-2 w-full rounded"><input type="text" id="parentName" placeholder="Parent Name" required class="border p-2 w-full rounded"><input type="number" id="level" placeholder="Level (1-12)" min="1" max="12" required class="border p-2 w-full rounded"><select id="section" class="border p-2 w-full rounded">${secOps}</select><select id="feeStatus" class="border p-2 w-full rounded"><option>Pending</option><option>Paid</option></select><button type="submit" class="bg-emerald-600 text-white px-4 py-2 rounded-lg w-full">Register Student</button></form></div>`; 
-            document.getElementById("enrollStudentForm")?.addEventListener("submit", async(e)=>{ e.preventDefault(); if(await addStudentLogic(regNumber.value, studentName.value, parentName.value, level.value, section.value, feeStatus.value)) renderStudentsList(); }); 
-        }
-        
-        function renderStaffManagement() { 
-            document.getElementById("mainContent").innerHTML = `<div class="bg-white p-6 rounded-xl shadow"><h2 class="text-2xl font-bold mb-4">👥 Enroll Staff</h2><form id="staffEnrollForm" class="space-y-4"><input type="text" id="staffUsername" placeholder="Username" required class="border p-2 w-full rounded"><input type="text" id="staffName" placeholder="Full Name" required class="border p-2 w-full rounded"><input type="email" id="staffEmail" placeholder="Email" required class="border p-2 w-full rounded"><select id="staffRole" class="border p-2 w-full rounded">${ROLES.filter(r => r.value !== 'parent').map(r=>`<option value="${r.value}">${r.label}</option>`).join('')}</select><div id="teacherLevelContainer" style="display:none;"><input type="number" id="teacherLevel" placeholder="Assigned Level (1-12)" min="1" max="12" class="border p-2 w-full rounded"></div><select id="staffSection" class="border p-2 w-full rounded">${STAFF_SECTIONS.map(s=>`<option value="${s}">${s}</option>`).join('')}</select><input type="text" id="staffPassword" value="password123" class="border p-2 w-full rounded"><button type="submit" class="bg-emerald-600 text-white px-4 py-2 rounded-lg">Register Staff</button></form></div>`; 
-            const roleSelect = document.getElementById("staffRole"); 
-            const levelDiv = document.getElementById("teacherLevelContainer"); 
-            roleSelect?.addEventListener("change",()=>{ levelDiv.style.display = roleSelect.value === 'teacher' ? 'block' : 'none'; }); 
-            document.getElementById("staffEnrollForm")?.addEventListener("submit", async(e)=>{ e.preventDefault(); const level = roleSelect.value === 'teacher' ? document.getElementById("teacherLevel").value : null; await enrollStaff(staffUsername.value, staffName.value, staffEmail.value, roleSelect.value, staffSection.value, staffPassword.value, level); renderStaffManagement(); }); 
-        }
-        
-        function renderCreateParent() {
-            document.getElementById("mainContent").innerHTML = `<div class="bg-white p-6 rounded-xl shadow"><h2 class="text-2xl font-bold mb-4">👪 Create Parent Account</h2><form id="createParentForm" class="space-y-4"><input type="text" id="parentStudentReg" placeholder="Student Registration Number" required class="border p-2 w-full rounded"><input type="password" id="parentAccountPassword" placeholder="Set Password" required class="border p-2 w-full rounded"><button type="submit" class="bg-emerald-600 text-white px-4 py-2 rounded-lg w-full">Create Parent Account</button></form></div>`;
-            document.getElementById("createParentForm")?.addEventListener("submit", async(e) => {
-                e.preventDefault();
-                await createParentAccount(parentStudentReg.value, parentAccountPassword.value);
-                renderCreateParent();
-            });
-        }
-        
-        function renderGradeTeacher() { 
-            let list = schoolData.students.filter(s=>s.section === (currentUser.assignedSection || SECTIONS[0])); 
-            if(!list.length) { document.getElementById("mainContent").innerHTML = `<div class="bg-white p-6 rounded-xl">No students in your section.</div>`; return; } 
-            let html = `<div class="bg-white p-6 rounded-xl shadow"><h2 class="text-2xl font-bold mb-4">✏️ Student Appraisal & Grading</h2><label class="font-semibold">Select Student:</label><select id="gradeStudentSelect" class="border p-2 w-full mb-4 rounded">${list.map(s=>`<option value="${s.id}">${s.name} (${s.reg_number})</option>`)}</select><div id="dynamicGradePanel"></div></div>`; 
-            document.getElementById("mainContent").innerHTML = html; 
-            const sel = document.getElementById("gradeStudentSelect"); 
-            const loadStudentGrades = () => { 
-                let student = schoolData.students.find(s=>s.id == sel.value); 
-                if(!student) return; 
-                let grades = student.grades || {}; 
-                let subjectsHtml = `<div class="mt-3"><h3 class="font-bold text-lg">Subjects & Scores</h3><div id="subjectsList">`; 
-                for(let [sub, score] of Object.entries(grades)) subjectsHtml += `<div class="grade-subject-row"><input type="text" value="${sub}" class="border p-2 rounded subject-name" placeholder="Subject"><input type="number" value="${score}" class="grade-input subject-score" min="0" max="100"><button class="remove-subject-btn bg-red-600 text-white px-2 py-1 rounded" onclick="window.removeSubjectField(this)">Remove</button></div>`; 
-                subjectsHtml += `</div><div class="flex gap-2 mt-3"><input type="text" id="newSubjectName" placeholder="New Subject" class="border p-2 rounded"><input type="number" id="newSubjectScore" placeholder="Grade" class="grade-input"><button id="addSubjectBtn" class="bg-emerald-600 text-white px-3 py-1 rounded">➕ Add Subject</button></div><button id="saveAllGradesBtn" class="bg-amber-600 text-white px-5 py-2 rounded mt-4 w-full">💾 Save All Grades</button></div>`; 
-                document.getElementById("dynamicGradePanel").innerHTML = subjectsHtml; 
-                document.getElementById("addSubjectBtn")?.addEventListener("click",()=>{ 
-                    let subName = document.getElementById("newSubjectName").value.trim(); 
-                    let score = document.getElementById("newSubjectScore").value; 
-                    if(!subName) return; 
-                    let container = document.getElementById("subjectsList"); 
-                    let row = document.createElement("div"); 
-                    row.className="grade-subject-row"; 
-                    row.innerHTML=`<input type="text" value="${subName}" class="border p-2 rounded subject-name"><input type="number" value="${score}" class="grade-input subject-score" min="0" max="100"><button class="remove-subject-btn bg-red-600 text-white px-2 py-1 rounded" onclick="window.removeSubjectField(this)">Remove</button>`; 
-                    container.appendChild(row); 
-                    document.getElementById("newSubjectName").value=""; 
-                    document.getElementById("newSubjectScore").value=""; 
-                }); 
-                document.getElementById("saveAllGradesBtn")?.addEventListener("click", async()=>{ 
-                    let rows = document.querySelectorAll("#subjectsList .grade-subject-row"); 
-                    let newGrades = {}; 
-                    rows.forEach(row=>{ 
-                        let sub = row.querySelector(".subject-name").value.trim(); 
-                        let score = parseInt(row.querySelector(".subject-score").value); 
-                        if(sub && !isNaN(score)) newGrades[sub.toLowerCase()] = score; 
-                    }); 
-                    await updateStudentGrades(student.id, newGrades); 
-                    loadStudentGrades(); 
-                }); 
-            }; 
-            sel?.addEventListener("change", loadStudentGrades); 
-            if(sel.value) loadStudentGrades(); 
-        }
-        
+        // ========== RENDER FUNCTIONS (condensed but fully functional) ==========
+        function renderNav() { let items = []; if(["dg_ceo","umc","daf","dprpa","der","do"].includes(currentUser.role)) items = ["dashboard","students","enroll-student","fees","payment-report","manage-slides"]; if(currentUser.role === "dg_ceo" || currentUser.role === "umc") items.push("staff-management"); if(currentUser.role === "headteacher") items = ["dashboard","section-students","enroll-student","attendance"]; if(currentUser.role === "teacher") items = ["dashboard","my-class","grade-students-teacher","attendance"]; if(currentUser.role === "parent") items = ["my-children","payment-history"]; if(items.length===0) items=["dashboard"]; const labels = { dashboard:"🏠 Dashboard", students:"📚 Students","enroll-student":"🎓 Enroll Student","staff-management":"👥 Enroll Staff","fees":"💰 Fees", "payment-report":"📄 Payments","manage-slides":"🖼️ Manage Slides","grade-students-teacher":"✏️ Student Appraisal","attendance":"✅ Attendance","my-children":"👨‍👧 My Children & Result","payment-history":"💸 History" }; const html = items.map(v=>`<a href="#" data-view="${v}" class="nav-link flex items-center space-x-3 px-4 py-2.5 rounded-lg text-slate-200 hover:bg-white/10"><i class="fas ${v==='dashboard'?'fa-tachometer-alt':'fa-folder'} w-5"></i><span>${labels[v]||v}</span></a>`).join(''); document.getElementById("dynamicNav").innerHTML = html; document.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', (e) => { e.preventDefault(); renderContentView(link.dataset.view); document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('bg-white/10','border-l-4','border-amber-400')); link.classList.add('bg-white/10','border-l-4','border-amber-400'); closeMobileSidebar(); })); renderContentView(items[0]); }
+        async function renderAttendance() { let list = schoolData.students.filter(s=>s.section === (currentUser.assignedSection || SECTIONS[0])); const today = new Date().toISOString().slice(0,10); const { data: records } = await supabaseClient.from('attendance_records').select('*').eq('date', today); let attendanceMap = {}; if(records) records.forEach(r=> attendanceMap[r.student_id] = r.status === 'present'); let html = `<div class="bg-white p-6 rounded-xl"><h2>✅ Attendance (Today)</h2>${list.map(s=>`<div class="flex gap-3 py-2"><span class="w-48">${s.name}</span><label><input type="checkbox" class="att-check" data-id="${s.id}" ${attendanceMap[s.id] ? 'checked' : ''}> Present</label></div>`).join('')}<button id="attSubmit" class="bg-emerald-600 text-white px-4 py-2 rounded mt-3">Save</button></div>`; document.getElementById("mainContent").innerHTML = html; document.getElementById("attSubmit")?.addEventListener("click",async()=>{ let payload=[]; document.querySelectorAll('.att-check').forEach(cb=>payload.push({ studentId: cb.dataset.id, status: cb.checked?'present':'absent' })); await saveAttendance(payload); }); }
+        function renderGradeTeacher() { let list = schoolData.students.filter(s=>s.section === (currentUser.assignedSection || SECTIONS[0])); if(!list.length) { document.getElementById("mainContent").innerHTML = `<div class="bg-white p-6 rounded-xl">No students in your section.</div>`; return; } let html = `<div class="bg-white p-6 rounded-xl shadow"><h2 class="text-2xl font-bold mb-4">✏️ Student Appraisal & Grading</h2><label class="font-semibold">Select Student:</label><select id="gradeStudentSelect" class="border p-2 w-full mb-4 rounded">${list.map(s=>`<option value="${s.id}">${s.name} (${s.reg_number})</option>`)}</select><div id="dynamicGradePanel"></div></div>`; document.getElementById("mainContent").innerHTML = html; const sel = document.getElementById("gradeStudentSelect"); const loadStudentGrades = () => { let studentId = sel.value; let student = schoolData.students.find(s=>s.id == studentId); if(!student) return; let grades = student.grades || {}; let panel = document.getElementById("dynamicGradePanel"); let subjectsHtml = `<div class="mt-3"><h3 class="font-bold text-lg">Subjects & Scores</h3><div id="subjectsList">`; for(let [sub, score] of Object.entries(grades)) subjectsHtml += `<div class="grade-subject-row"><input type="text" value="${sub}" class="border p-2 rounded subject-name" placeholder="Subject"><input type="number" value="${score}" class="grade-input subject-score" min="0" max="100"><button class="remove-subject-btn bg-red-600 text-white px-2 py-1 rounded" onclick="window.removeSubjectField(this)">Remove</button></div>`; subjectsHtml += `</div><div class="flex gap-2 mt-3"><input type="text" id="newSubjectName" placeholder="New Subject" class="border p-2 rounded"><input type="number" id="newSubjectScore" placeholder="Grade" class="grade-input"><button id="addSubjectBtn" class="bg-emerald-600 text-white px-3 py-1 rounded">➕ Add Subject</button></div><button id="saveAllGradesBtn" class="bg-amber-600 text-white px-5 py-2 rounded mt-4 w-full">💾 Save All Grades</button></div>`; panel.innerHTML = subjectsHtml; document.getElementById("addSubjectBtn")?.addEventListener("click",()=>{ let subName = document.getElementById("newSubjectName").value.trim(); let score = document.getElementById("newSubjectScore").value; if(!subName) return; let container = document.getElementById("subjectsList"); let row = document.createElement("div"); row.className="grade-subject-row"; row.innerHTML=`<input type="text" value="${subName}" class="border p-2 rounded subject-name"><input type="number" value="${score}" class="grade-input subject-score" min="0" max="100"><button class="remove-subject-btn bg-red-600 text-white px-2 py-1 rounded" onclick="window.removeSubjectField(this)">Remove</button>`; container.appendChild(row); document.getElementById("newSubjectName").value=""; document.getElementById("newSubjectScore").value=""; }); document.getElementById("saveAllGradesBtn")?.addEventListener("click", async()=>{ let rows = document.querySelectorAll("#subjectsList .grade-subject-row"); let newGrades = {}; rows.forEach(row=>{ let sub = row.querySelector(".subject-name").value.trim(); let score = parseInt(row.querySelector(".subject-score").value); if(sub && !isNaN(score)) newGrades[sub.toLowerCase()] = score; }); await updateStudentGrades(studentId, newGrades); loadStudentGrades(); }); }; sel?.addEventListener("change", loadStudentGrades); if(sel.value) loadStudentGrades(); }
         window.removeSubjectField = (btn) => btn.closest('.grade-subject-row')?.remove();
+        function renderMyChildren() { let child = schoolData.students.find(s=>s.id === currentUser.studentId); if(!child) return document.getElementById("mainContent").innerHTML=`<div class="bg-white p-6 rounded-xl"><p>No linked student</p></div>`; let grades = child.grades || {}; let total = 0, count = 0; for(let g of Object.values(grades)) { total+=g; count++; } let avg = count? (total/count).toFixed(1) : 'N/A'; let gradeTable = `<table class="w-full border mt-3"><thead><tr class="bg-amber-100"><th>Subject</th><th>Score</th><th>Grade</th></tr></thead><tbody>${Object.entries(grades).map(([sub,sc])=>`<tr><td class="border p-2 capitalize">${sub}</td><td class="border p-2">${sc}</td><td class="border p-2">${sc>=80?'A':sc>=70?'B':sc>=60?'C':sc>=50?'D':'E'}</td></tr>`).join('')}</tbody></table>`; let avgRemark = avg!=='N/A' ? (avg>=75?'Excellent':avg>=60?'Good':avg>=45?'Fair':'Needs Improvement') : 'No Data'; document.getElementById("mainContent").innerHTML=`<div class="bg-white p-6 rounded-xl shadow result-card"><h2 class="text-2xl font-bold border-b pb-2">📘 Academic Result: ${child.name}</h2><div class="grid md:grid-cols-2 gap-4 mt-4"><div><p><strong>📌 Reg Number:</strong> ${child.reg_number}</p><p><strong>👨‍👩 Parent:</strong> ${child.parent_name}</p><p><strong>🏫 Class:</strong> ${child.section} (Level ${child.level})</p><p><strong>💰 Fee Status:</strong> <span class="${child.feeStatus==='Paid'?'text-green-600':'text-red-500'}">${child.feeStatus}</span></p><p><strong>📅 Attendance:</strong> ${child.attendance}%</p></div><div><p><strong>⭐ Average Score:</strong> ${avg}</p><p><strong>📝 Overall Remark:</strong> ${avgRemark}</p></div></div>${gradeTable}</div>`; }
+        function renderStaffManagement() { if(!['dg_ceo','umc'].includes(currentUser.role)) { showToast("Access denied", true); renderContentView("dashboard"); return; } const roleOps = ROLES.map(r=>`<option value="${r.value}">${r.label}</option>`).join(''); const secOps = STAFF_SECTIONS.map(s=>`<option value="${s}">${s}</option>`).join(''); document.getElementById("mainContent").innerHTML = `<div class="bg-white p-6 rounded-xl shadow"><h2 class="text-2xl font-bold mb-4">👥 Enroll Staff</h2><form id="staffEnrollForm" class="space-y-4"><input type="text" id="staffName" placeholder="Full Name" required class="border p-2 w-full rounded"><input type="email" id="staffEmail" placeholder="Email" required class="border p-2 w-full rounded"><select id="staffRole" class="border p-2 w-full rounded">${roleOps}</select><div id="teacherLevelContainer" style="display:none;"><input type="number" id="teacherLevel" placeholder="Assigned Level (1-12)" min="1" max="12" class="border p-2 w-full rounded"></div><select id="staffSection" class="border p-2 w-full rounded">${secOps}</select><input type="text" id="staffPassword" value="password123" class="border p-2 w-full rounded"><button type="submit" class="bg-emerald-600 text-white px-4 py-2 rounded-lg">Register Staff</button></form><hr class="my-6"><h3 class="text-xl font-semibold">Existing Staff</h3><div class="overflow-x-auto"><table class="w-full border"><thead><tr class="bg-gray-100"><th>Name</th><th>Email</th><th>Role</th><th>Section</th><th>Level</th></tr></thead><tbody>${schoolData.teachers.map(t=>`<tr class="border-b"><td class="p-2">${t.name}</td><td class="p-2">${t.email}</td><td class="p-2">${t.role||'-'}</td><td class="p-2">${t.assigned_section||'-'}</td><td class="p-2">${t.level ? t.level : (t.role?.toLowerCase().includes('teacher') ? 'Not set' : '-')}</td></tr>`).join('')}</tbody></table></div></div>`; const roleSelect = document.getElementById("staffRole"); const levelDiv = document.getElementById("teacherLevelContainer"); const toggleLevel = () => { levelDiv.style.display = roleSelect.value === 'teacher' ? 'block' : 'none'; }; roleSelect.addEventListener("change", toggleLevel); toggleLevel(); document.getElementById("staffEnrollForm")?.addEventListener("submit", async(e)=>{ e.preventDefault(); const level = (roleSelect.value === 'teacher') ? document.getElementById("teacherLevel").value : null; if(roleSelect.value === 'teacher' && (!level || level<1 || level>12)) { showToast("Valid level required", true); return; } await enrollStaff(staffName.value, staffEmail.value, roleSelect.value, staffSection.value, staffPassword.value, level); renderStaffManagement(); }); }
+        function renderStudentsList() { let html = `<div class="bg-white p-5 rounded-xl shadow"><h2 class="text-xl font-bold mb-4">📋 All Students</h2><div class="overflow-x-auto"><table class="w-full border"><thead><tr class="bg-gray-100"><th>Reg No</th><th>Name</th><th>Parent</th><th>Section</th><th>Level</th><th>Fees</th><th>Status</th><th>Actions</th></tr></thead><tbody>`; for(let s of schoolData.students) html += `<tr><td class="p-2">${s.reg_number}</td><td class="p-2">${s.name}</td><td class="p-2">${s.parent_name||'-'}</td><td class="p-2">${s.section}</td><td class="p-2">${s.level}</td><td class="${s.feeStatus==='Paid'?'text-green-600':'text-red-500'}">${s.feeStatus}</td><td class="p-2"><span class="${s.status==='active'?'active-badge':'suspended-badge'}">${s.status}</span></td><td class="p-2"><button onclick="window.toggleSuspendStudent('${s.id}','${s.status}')" class="suspend-btn"><i class="fas ${s.status==='active'?'fa-pause':'fa-play'}"></i> ${s.status==='active'?'Suspend':'Activate'}</button> <button onclick="window.deleteStudent('${s.id}')" class="delete-btn"><i class="fas fa-trash"></i> Delete</button></td></tr>`; html += `</tbody></table></div></div>`; document.getElementById("mainContent").innerHTML = html; window.deleteStudent = deleteStudent; window.toggleSuspendStudent = toggleSuspendStudent; }
+        function renderEnrollStudent() { const secOps = SECTIONS.map(s=>`<option value="${s}">${s}</option>`).join(''); document.getElementById("mainContent").innerHTML = `<div class="bg-white p-6 rounded-xl shadow"><h2 class="text-2xl font-bold mb-4">🎓 Enroll Student</h2><form id="enrollStudentForm" class="space-y-4"><input type="text" id="regNumber" placeholder="Registration Number" required class="border p-2 w-full rounded"><input type="text" id="studentName" placeholder="Student Name" required class="border p-2 w-full rounded"><input type="text" id="parentName" placeholder="Parent Name" required class="border p-2 w-full rounded"><input type="number" id="level" placeholder="Level (1-12)" min="1" max="12" required class="border p-2 w-full rounded"><select id="section" class="border p-2 w-full rounded">${secOps}</select><select id="feeStatus" class="border p-2 w-full rounded"><option>Pending</option><option>Paid</option></select><button type="submit" class="bg-emerald-600 text-white px-4 py-2 rounded-lg w-full">Register Student</button></form></div>`; document.getElementById("enrollStudentForm")?.addEventListener("submit", async(e)=>{ e.preventDefault(); if(await addStudentLogic(regNumber.value, studentName.value, parentName.value, level.value, section.value, feeStatus.value)) renderStudentsList(); }); }
+        function renderFees() { let pending = schoolData.students.filter(s=>s.feeStatus==="Pending"); document.getElementById("mainContent").innerHTML = `<div class="bg-white p-5 rounded-xl"><h2>💰 Pending Fees</h2><ul>${pending.map(s=>`<li class="flex justify-between">${s.name} (${s.reg_number}) <button onclick="window.payFeeAction('${s.id}')" class="bg-amber-500 text-white px-3 py-1 rounded">Mark Paid</button></li>`).join('')}</ul></div>`; window.payFeeAction = async (sid)=>{ await recordFeePayment(sid, 25000); renderFees(); }; }
+        function renderSlideManager() { if(!currentUser || !['dg_ceo','umc','daf','dprpa','der','do'].includes(currentUser.role)) { showToast("Admin only", true); renderContentView("dashboard"); return; } let html = `<div class="bg-white p-6 rounded-xl shadow"><h2 class="text-2xl font-bold mb-4">🖼️ Manage Global Slideshow</h2><input type="file" id="slideFile" accept="image/*" class="border p-2 w-full"><input id="slideCap" placeholder="Caption" class="border p-2 w-full mt-2"><button id="uploadSlideBtn" class="bg-emerald-600 text-white p-2 rounded mt-2 w-full">Upload to Supabase</button><div class="grid grid-cols-2 gap-2 mt-6">${slidesData.map((s,i)=>`<div class="border rounded p-2"><img src="${s.url}" class="h-28 object-cover w-full"><p class="text-sm truncate">${s.caption}</p><button onclick="window.deleteSlideFromSupabase('${s.id}','${s.url}')" class="bg-red-500 text-white text-xs p-1 w-full mt-1">Delete</button></div>`).join('')}</div></div>`; document.getElementById("mainContent").innerHTML = html; document.getElementById("uploadSlideBtn")?.addEventListener("click", async()=>{ let file = document.getElementById("slideFile").files[0]; if(!file){ showToast("Select image", true); return; } let cap = document.getElementById("slideCap").value; await uploadSlideToSupabase(file, cap); renderSlideManager(); }); window.deleteSlideFromSupabase = deleteSlideFromSupabase; }
+        function renderContentView(view) { const fns={dashboard:()=>document.getElementById("mainContent").innerHTML=`<div class="bg-white p-6 rounded-xl"><h2>Welcome ${currentUser.full_name}</h2><div class="grid grid-cols-2 gap-4 mt-6"><div class="p-5 bg-emerald-50"><i class="fas fa-users text-3xl"></i><p class="text-2xl">${schoolData.students.length}</p><p>Students</p></div><div class="p-5 bg-amber-50"><i class="fas fa-chalkboard-user text-3xl"></i><p class="text-2xl">${schoolData.teachers.length}</p><p>Staff</p></div></div></div>`, students:renderStudentsList, "enroll-student":renderEnrollStudent, "staff-management":renderStaffManagement, fees:renderFees, "grade-students-teacher":renderGradeTeacher, attendance:renderAttendance, "my-children":renderMyChildren, "payment-history":()=>document.getElementById("mainContent").innerHTML="<div class='bg-white p-6'>Payment history will appear soon</div>", "manage-slides":renderSlideManager }; if(fns[view]) fns[view](); else document.getElementById("mainContent").innerHTML="<div class='bg-white p-6'>Module under development</div>"; }
         
-        function renderMyChildren() { 
-            let child = schoolData.students.find(s=>s.id === currentUser.studentId); 
-            if(!child) return document.getElementById("mainContent").innerHTML=`<div class="bg-white p-6 rounded-xl"><p>No linked student</p></div>`; 
-            let grades = child.grades || {}; 
-            let total = 0, count = 0; 
-            for(let g of Object.values(grades)) { total+=g; count++; } 
-            let avg = count? (total/count).toFixed(1) : 'N/A'; 
-            let gradeTable = `<table class="w-full border mt-3"><thead><tr class="bg-amber-100"><th>Subject</th><th>Score</th><th>Grade</th></tr></thead><tbody>${Object.entries(grades).map(([sub,sc])=>`<tr><td class="border p-2 capitalize">${sub}</td><td class="border p-2">${sc}</td><td class="border p-2">${sc>=80?'A':sc>=70?'B':sc>=60?'C':sc>=50?'D':'E'}</td></tr>`).join('')}</tbody></table>`; 
-            let avgRemark = avg!=='N/A' ? (avg>=75?'Excellent':avg>=60?'Good':avg>=45?'Fair':'Needs Improvement') : 'No Data'; 
-            document.getElementById("mainContent").innerHTML=`<div class="bg-white p-6 rounded-xl shadow result-card"><h2 class="text-2xl font-bold border-b pb-2">📘 Academic Result: ${child.name}</h2><div class="grid md:grid-cols-2 gap-4 mt-4"><div><p><strong>📌 Reg Number:</strong> ${child.reg_number}</p><p><strong>👨‍👩 Parent:</strong> ${child.parent_name}</p><p><strong>🏫 Class:</strong> ${child.section} (Level ${child.level})</p><p><strong>💰 Fee Status:</strong> <span class="${child.feeStatus==='Paid'?'text-green-600':'text-red-500'}">${child.feeStatus}</span></p><p><strong>📅 Attendance:</strong> ${child.attendance}%</p></div><div><p><strong>⭐ Average Score:</strong> ${avg}</p><p><strong>📝 Overall Remark:</strong> ${avgRemark}</p></div></div>${gradeTable}</div>`; 
-        }
-        
-        function renderAttendance() { 
-            let list = schoolData.students.filter(s=>s.section === (currentUser.assignedSection || SECTIONS[0])); 
-            document.getElementById("mainContent").innerHTML = `<div class="bg-white p-6 rounded-xl"><h2>✅ Attendance</h2>${list.map(s=>`<div class="flex gap-3 py-2"><span class="w-48">${s.name}</span><label><input type="checkbox" class="att-check" data-id="${s.id}"> Present</label></div>`).join('')}<button id="attSubmit" class="bg-emerald-600 text-white px-4 py-2 rounded mt-3">Save</button></div>`; 
-            document.getElementById("attSubmit")?.addEventListener("click",async()=>{ 
-                let payload=[]; 
-                document.querySelectorAll('.att-check').forEach(cb=>payload.push({ studentId: cb.dataset.id, status: cb.checked?'present':'absent' })); 
-                await saveAttendance(payload); 
-                renderAttendance(); 
-            }); 
-        }
-        
-        function renderFees() { 
-            let pending = schoolData.students.filter(s=>s.feeStatus==="Pending"); 
-            document.getElementById("mainContent").innerHTML = `<div class="bg-white p-5 rounded-xl"><h2>💰 Pending Fees</h2><ul>${pending.map(s=>`<li class="flex justify-between">${s.name} (${s.reg_number}) <button onclick="window.payFeeAction('${s.id}')" class="bg-amber-500 text-white px-3 py-1 rounded">Mark Paid</button></li>`).join('')}</ul></div>`; 
-            window.payFeeAction = async (sid)=>{ await recordFeePayment(sid, 25000); renderFees(); }; 
-        }
-        
-        function renderContentView(view) { 
-            const fns={
-                dashboard:()=>document.getElementById("mainContent").innerHTML=`<div class="bg-white p-6 rounded-xl"><h2>Welcome ${currentUser.full_name}</h2><div class="grid grid-cols-2 gap-4 mt-6"><div class="p-5 bg-emerald-50"><i class="fas fa-users text-3xl"></i><p class="text-2xl">${schoolData.students.length}</p><p>Students</p></div><div class="p-5 bg-amber-50"><i class="fas fa-chalkboard-user text-3xl"></i><p class="text-2xl">${schoolData.teachers.length}</p><p>Staff</p></div></div></div>`, 
-                students:renderStudentsList, 
-                "enroll-student":renderEnrollStudent, 
-                "staff-management":renderStaffManagement,
-                "create-parent":renderCreateParent,
-                fees:renderFees, 
-                "grade-students-teacher":renderGradeTeacher, 
-                attendance:renderAttendance, 
-                "my-children":renderMyChildren, 
-                "manage-slides":()=>{ document.getElementById("mainContent").innerHTML = `<div class="bg-white p-6 rounded-xl"><h2>🖼️ Slideshow Manager</h2><p>Slides loaded from database. Use Supabase dashboard to manage slides.</p><div class="grid grid-cols-3 gap-2 mt-4">${slidesData.map(s=>`<div><img src="${s.url}" class="h-24 object-cover w-full"><p class="text-xs">${s.caption}</p></div>`).join('')}</div></div>`; }
-            }; 
-            if(fns[view]) fns[view](); 
-            else document.getElementById("mainContent").innerHTML="<div class='bg-white p-6'>Module under development</div>"; 
-        }
-        
-        // ========== SESSION CHECK ==========
-        async function checkSession() {
-            const { data: { session } } = await window.supabaseClient.auth.getSession();
-            if (session) {
-                const { data: profile } = await window.supabaseClient.from('profiles').select('*').eq('id', session.user.id).single();
-                if (profile?.role) {
-                    currentUser = { ...profile, full_name: profile.full_name, role: profile.role, section: profile.section };
-                    if (profile.role === 'parent') {
-                        const { data: student } = await window.supabaseClient.from('students').select('id, name').eq('id', profile.student_id).single();
-                        if (student) {
-                            currentUser.studentId = student.id;
-                            currentUser.studentName = student.name;
-                        }
-                    }
-                    await refreshSchoolData();
-                    showDashboard();
-                    return;
-                }
-            }
-            document.getElementById('landingPage').style.display = 'block';
-            document.getElementById('appContainer').classList.add('hidden');
-            checkForAnyAdmin();
-        }
-        
-        // ========== EVENT LISTENERS & INIT ==========
-        function closeMobileSidebar() { 
-            let sidebar = document.getElementById('dynamicSidebar'); 
-            let overlay = document.getElementById('sidebarOverlay'); 
-            if(window.innerWidth <= 768) { sidebar.classList.remove('open'); overlay.classList.remove('active'); } 
-        }
-        
-        function initCookieConsent() { 
-            const banner = document.getElementById('cookieBanner'); 
-            const acceptBtn = document.getElementById('acceptCookiesBtn'); 
-            if (!localStorage.getItem('cookies_accepted')) banner.style.display = 'flex'; 
-            acceptBtn.addEventListener('click', () => { localStorage.setItem('cookies_accepted', 'true'); banner.style.display = 'none'; showToast("Cookies accepted ✅"); }); 
-        }
-        
-        // Wire up UI events
+        // Mobile & event binding
+        function closeMobileSidebar() { let sidebar = document.getElementById('dynamicSidebar'); let overlay = document.getElementById('sidebarOverlay'); if(window.innerWidth <= 768) { sidebar.classList.remove('open'); overlay.classList.remove('active'); } }
+        function toggleMobileSidebar() { let sidebar = document.getElementById('dynamicSidebar'); let overlay = document.getElementById('sidebarOverlay'); if(window.innerWidth <= 768) { sidebar.classList.toggle('open'); overlay.classList.toggle('active'); } }
+        document.getElementById('mobileMenuToggle')?.addEventListener('click', toggleMobileSidebar); document.getElementById('closeMobileSidebar')?.addEventListener('click', closeMobileSidebar); document.getElementById('sidebarOverlay')?.addEventListener('click', closeMobileSidebar);
+        function initCookieConsent() { const banner = document.getElementById('cookieBanner'); const acceptBtn = document.getElementById('acceptCookiesBtn'); if (!localStorage.getItem('cookies_accepted')) banner.style.display = 'flex'; acceptBtn.addEventListener('click', () => { localStorage.setItem('cookies_accepted', 'true'); banner.style.display = 'none'; showToast("Cookies accepted ✅"); }); }
         document.getElementById('loginBtnHero')?.addEventListener('click',()=>{ document.getElementById('landingPage').style.display='none'; document.getElementById('loginScreen').style.display='flex'; });
         document.getElementById('loginBtnFooter')?.addEventListener('click',()=>{ document.getElementById('landingPage').style.display='none'; document.getElementById('loginScreen').style.display='flex'; });
         document.getElementById('parentLoginBtn')?.addEventListener('click',()=>{ document.getElementById('landingPage').style.display='none'; document.getElementById('parentLoginModal').style.display='flex'; });
+        document.getElementById('adminSignupBtn')?.addEventListener('click',()=>{ document.getElementById('landingPage').style.display='none'; document.getElementById('adminSignupModal').style.display='flex'; });
         document.getElementById('closeLoginBtn')?.addEventListener('click',()=>{ document.getElementById('loginScreen').style.display='none'; document.getElementById('landingPage').style.display='block'; });
         document.getElementById('closeParentLoginBtn')?.addEventListener('click',()=>{ document.getElementById('parentLoginModal').style.display='none'; document.getElementById('landingPage').style.display='block'; });
+        document.getElementById('closeAdminSignupBtn')?.addEventListener('click',()=>{ document.getElementById('adminSignupModal').style.display='none'; document.getElementById('landingPage').style.display='block'; });
         document.getElementById('topLogoutBtn')?.addEventListener('click',logoutUser);
-        document.getElementById('authForm')?.addEventListener('submit', async(e)=>{ e.preventDefault(); await loginWithUsername(authUsername.value, authPassword.value); });
-        document.getElementById('parentAuthForm')?.addEventListener('submit', async(e)=>{ e.preventDefault(); await parentLogin(parentUsername.value, parentPassword.value); });
+        document.getElementById('authForm')?.addEventListener('submit', async(e)=>{ e.preventDefault(); await loginUser(authEmail.value, authPassword.value); });
+        document.getElementById('parentAuthForm')?.addEventListener('submit', async(e)=>{ e.preventDefault(); await parentLogin(parentRegNo.value, parentPassword.value); });
+        document.getElementById('adminSignupForm')?.addEventListener('submit', async(e)=>{ e.preventDefault(); await adminSignup(adminFullName.value, adminEmail.value, adminPassword.value, adminRole.value, adminRegCode.value); });
         document.getElementById('applyNowBtn')?.addEventListener('click',()=>{ alert("📝 Contact admissions: 08067990749 or visit school for forms."); });
-        document.getElementById('showSetupAdminBtn')?.addEventListener('click',()=>{ document.getElementById('loginScreen').style.display='none'; document.getElementById('adminSetupModal').style.display='flex'; });
-        document.getElementById('closeAdminSetupBtn')?.addEventListener('click',()=>{ document.getElementById('adminSetupModal').style.display='none'; document.getElementById('loginScreen').style.display='flex'; });
-        document.getElementById('adminSetupForm')?.addEventListener('submit', async(e)=>{ e.preventDefault(); try { await createAdminAccount(adminUsername.value, adminFullName.value, adminEmail.value, adminPassword.value); } catch(err) { showToast(err.message, true); } });
-        document.getElementById('mobileMenuToggle')?.addEventListener('click',()=>{ let sidebar = document.getElementById('dynamicSidebar'); let overlay = document.getElementById('sidebarOverlay'); if(window.innerWidth <= 768) { sidebar.classList.toggle('open'); overlay.classList.toggle('active'); } });
-        document.getElementById('closeMobileSidebar')?.addEventListener('click', closeMobileSidebar);
-        document.getElementById('sidebarOverlay')?.addEventListener('click', closeMobileSidebar);
-        document.getElementById('prevSlide')?.addEventListener('click',()=>goToSlide(currentSlideIndex-1));
-        document.getElementById('nextSlide')?.addEventListener('click',()=>goToSlide(currentSlideIndex+1));
-        
-        // Date/Time & Weather
         function updateDateTime() { let now=new Date(); if(document.getElementById('liveTime')) document.getElementById('liveTime').innerText=now.toLocaleTimeString('en-NG'); if(document.getElementById('liveDate')) document.getElementById('liveDate').innerText=now.toLocaleDateString('en-NG',{weekday:'long',year:'numeric',month:'long',day:'numeric'}); }
         setInterval(updateDateTime,1000); updateDateTime();
         if(navigator.geolocation) navigator.geolocation.getCurrentPosition(async(pos)=>{ let res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&current_weather=true`); let data = await res.json(); if(document.getElementById('weatherTemp')) document.getElementById('weatherTemp').innerText = Math.round(data.current_weather.temperature); document.getElementById('weatherDesc').innerText = data.current_weather.weathercode>70?"Rainy":(data.current_weather.weathercode>50?"Cloudy":"Clear"); });
-        
-        // Start app
-        loadSlidesFromSupabase();
-        checkSession();
-        initCookieConsent();
+        document.getElementById('prevSlide')?.addEventListener('click',()=>goToSlide(currentSlideIndex-1));
+        document.getElementById('nextSlide')?.addEventListener('click',()=>goToSlide(currentSlideIndex+1));
+        loadSlidesFromSupabase(); checkSession(); initCookieConsent();
     </script>
 </body>
-</html>
+                                                                                                         </html>
